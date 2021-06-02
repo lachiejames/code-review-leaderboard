@@ -1,0 +1,30 @@
+{
+    "value": [
+        {
+            "lastUpdatedDate": "2021-04-28T00:29:12.53Z",
+            "comments": [
+                {
+                    "author": {
+                        "displayName": "Gough Whitlam"
+                    },
+                    "content": "Gough Whitlam voted 10",
+                    "lastUpdatedDate": "2021-04-28T00:29:12.53Z",
+                    "commentType": "system"
+                }
+            ]
+        },
+        {
+            "lastUpdatedDate": "2021-04-28T07:32:28.66Z",
+            "comments": [
+                {
+                    "author": {
+                        "displayName": "Bob Hawke"
+                    },
+                    "content": "Bob Hawke voted 10",
+                    "lastUpdatedDate": "2021-04-28T07:32:28.66Z",
+                    "commentType": "system"
+                }
+            ]
+        }
+    ]
+}

@@ -1,5 +1,8 @@
 name: $(Rev:r:)
 
+variables:
+    isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+
 jobs:
     - job: Test
       timeoutInMinutes: 20
@@ -9,11 +12,19 @@ jobs:
       steps:
           - script: yarn --network-timeout 100000
             displayName: Install
+
           - script: yarn build
             displayName: Build
+
           - script: yarn test
             displayName: Test
+
           - script: |
                 #!/bin/bash
                 bash <(curl -s https://codecov.io/bash) -t $(CODECOV_TOKEN)
+            condition: eq(variables.isMain, true)
             displayName: Publish Test Coverage
+
+          - script: yarn semantic-release
+            condition: eq(variables.isMain, true)
+            displayName: Semantic Release

@@ -14,5 +14,3 @@ tmp/
 npm-debug.log
 package-lock.json
 yarn-error.log
-
-/template/**/yarn.lock

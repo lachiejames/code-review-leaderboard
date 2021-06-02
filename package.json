@@ -27,10 +27,10 @@
         "typescript": "4.2.4"
     },
     "scripts": {
-        "build": "tsc;",
-        "format": "prettier --write .; eslint . --fix;",
-        "start": "yarn build; node .;",
-        "test": "jest --coverage --detectOpenHandles --runInBand;"
+        "build": "tsc",
+        "format": "prettier --write . & eslint . --fix",
+        "start": "yarn build & node .",
+        "test": "jest --coverage --detectOpenHandles --runInBand"
     },
     "directories": {
         "lib": "lib"

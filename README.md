@@ -1,5 +1,7 @@
 # code-review-leaderboard
 
+[![Build Status](https://dev.azure.com/lachiejames/code-review-leaderboard/_apis/build/status/lachiejames.code-review-leaderboard?branchName=main)](https://dev.azure.com/lachiejames/code-review-leaderboard/_build/latest?definitionId=12&branchName=main) [![codecov](https://codecov.io/gh/lachiejames/code-review-leaderboard/branch/main/graph/badge.svg?token=kNLA2ldKKF)](https://codecov.io/gh/lachiejames/code-review-leaderboard)
+
 ## Setting up your configuration
 
 Open `code-review-leaderboard.config.js` from the root directory, and populate the following options:

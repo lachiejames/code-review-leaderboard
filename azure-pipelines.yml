@@ -7,7 +7,7 @@ jobs:
           vmImage: "macOS-latest"
 
       steps:
-          - script: yarn
+          - script: yarn --network-timeout 100000
             displayName: Install
           - script: yarn build
             displayName: Build

@@ -7,9 +7,13 @@ jobs:
           vmImage: "macOS-latest"
 
       steps:
-          - script: yarn
+          - script: yarn --network-timeout 100000
             displayName: Install
           - script: yarn build
             displayName: Build
           - script: yarn test
             displayName: Test
+          - script: |
+                #!/bin/bash
+                bash <(curl -s https://codecov.io/bash) -t $(CODECOV_TOKEN)
+            displayName: Publish Test Coverage

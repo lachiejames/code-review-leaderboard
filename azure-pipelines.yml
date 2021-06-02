@@ -1,0 +1,15 @@
+name: $(Rev:r:)
+
+jobs:
+    - job: Test
+      timeoutInMinutes: 20
+      pool:
+          vmImage: "macOS-latest"
+
+      steps:
+          - script: yarn
+            displayName: Install
+          - script: yarn build
+            displayName: Build
+          - script: yarn test
+            displayName: Test

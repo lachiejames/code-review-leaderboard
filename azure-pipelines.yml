@@ -26,5 +26,8 @@ jobs:
             displayName: Publish Test Coverage
 
           - script: yarn semantic-release
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+              NPM_TOKEN: $(NPM_TOKEN)
             condition: eq(variables.isMain, true)
             displayName: Semantic Release

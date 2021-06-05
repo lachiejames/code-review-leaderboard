@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lachiejames/code-review-leaderboard/compare/v1.1.0...v1.1.1) (2021-06-05)
+
+
+### Bug Fixes
+
+* Remove config.maxLookups ([#3](https://github.com/lachiejames/code-review-leaderboard/issues/3)) ([791fe1b](https://github.com/lachiejames/code-review-leaderboard/commit/791fe1bacb7256908cf80eb4eb9c06e5d7b044ac))
+
 # [1.1.0](https://github.com/lachiejames/code-review-leaderboard/compare/v1.0.0...v1.1.0) (2021-06-05)
 
 

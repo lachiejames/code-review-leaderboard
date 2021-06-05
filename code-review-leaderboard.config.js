@@ -31,7 +31,4 @@ module.exports = {
 
     // Max amount of time to wait for a single HTTP request response, in milliseconds
     httpTimeoutInMS: 5000,
-
-    // Each lookup returns up to 100 merge requests.  This option specifies the maximum amount of pages to lookup.
-    maxLookups: 100,
 };

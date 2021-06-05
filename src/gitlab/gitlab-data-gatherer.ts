@@ -6,6 +6,7 @@ import { GitlabHttpHeaders, GitlabHttpParams, GitlabPullRequestData, GitlabPullR
 
 const PULL_REQUEST_LOOKUP_PATH = "api/v4/merge_requests";
 const PROJECT_LOOKUP_PATH = "api/v4/projects";
+const MAX_LOOKUP_CALLS = 100;
 const MAX_RESULTS_PER_PAGE = 100;
 
 export const getGitlabHttpHeaders = (): GitlabHttpHeaders => {
@@ -78,7 +79,7 @@ export const fetchGitlabPullRequestNoteData = async (projectID: number, pullRequ
 export const fetchAllGitlabPullRequestData = async (): Promise<GitlabPullRequestData[]> => {
     let pullRequestsData: GitlabPullRequestData[] = [];
 
-    for (let pageNumber = 1; pageNumber <= config.maxLookups; pageNumber++) {
+    for (let pageNumber = 1; pageNumber <= MAX_LOOKUP_CALLS; pageNumber++) {
         const lookupResults: GitlabPullRequestData[] = await fetchGitlabPullRequestDataByPage(pageNumber);
         pullRequestsData = pullRequestsData.concat(lookupResults);
 

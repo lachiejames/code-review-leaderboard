@@ -40,14 +40,13 @@ describe("gitlab data gatherer", () => {
             });
         });
 
-        it("will stop fetching data after {config.maxLookups} calls", async () => {
-            setGitlabFullPageMockResponse(1);
-            setGitlabFullPageMockResponse(2);
-
-            config.maxLookups = 2;
+        it("will fetch a maximum of 100000 merge requests", async () => {
+            for (let pageNumber = 1; pageNumber <= 100; pageNumber++) {
+                setGitlabFullPageMockResponse(pageNumber);
+            }
 
             const data: GitlabPullRequestData[] = await fetchAllGitlabPullRequestData();
-            expect(data.length).toBe(200);
+            expect(data.length).toBe(10000);
         });
 
         describe("error responses", () => {

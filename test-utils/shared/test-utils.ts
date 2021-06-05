@@ -12,6 +12,5 @@ export const setMockConfig = (): void => {
     config.gitlab.baseURL = "https://gitlab.example.com/";
     config.gitlab.personalAccessToken = "abc123";
 
-    config.maxLookups = 100;
     config.httpTimeoutInMS = 5000;
 };

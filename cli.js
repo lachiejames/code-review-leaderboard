@@ -2,8 +2,10 @@
 
 const { addDays, format, isBefore } = require("date-fns");
 const prompts = require("prompts");
-const { run } = require("./lib/src/shared/leaderboard");
+
 const config = require("./code-review-leaderboard.config");
+const { run } = require("./lib/src/shared/leaderboard");
+const logError = require("./lib/src/shared/shared-logger");
 
 const setStartDate = async () => {
     const results = await prompts({

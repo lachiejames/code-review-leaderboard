@@ -3,8 +3,8 @@ import { getAzurePullRequests } from "../azure/azure";
 import { getGitlabPullRequests } from "../gitlab/gitlab";
 import { calculateResults, createResultsTable, logResults, sortResults } from "../shared/result-calculator";
 import { Result } from "../shared/result.model";
-import { verifyConfig } from "./config-verifier";
 
+import { verifyConfig } from "./config-verifier";
 import { PullRequest } from "./pull-request.model";
 import { logError } from "./shared-logger";
 

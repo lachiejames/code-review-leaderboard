@@ -7,8 +7,7 @@ import {
     setAzureRepositoryTimeoutResponse,
     setAzureRequestMocks,
 } from "../../test-utils/azure/azure-request-mocks";
-import { setMockConfig } from "../../test-utils/shared/test-utils";
-import { getConfig } from "../config";
+import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
 
 import { fetchAzurePullRequestsByProject, fetchAzureRepositoryData, fetchPullRequestNotes } from "./azure-data-gatherer";
 import { AzurePullRequest, AzurePullRequestNote, AzureRepository } from "./azure-models";
@@ -41,7 +40,7 @@ describe("azure data gatherer", () => {
             });
 
             it("throws expected error when HTTP request times out", async () => {
-                config.httpTimeoutInMS = 1;
+                overrideConfig({ httpTimeoutInMS: 1 });
                 setAzureRepositoryTimeoutResponse();
 
                 await expect(fetchAzureRepositoryData()).rejects.toThrowError(
@@ -105,7 +104,7 @@ describe("azure data gatherer", () => {
         });
 
         it("logs expected error when HTTP request times out", async () => {
-            config.httpTimeoutInMS = 1;
+            overrideConfig({ httpTimeoutInMS: 1 });
             setAzurePullRequestTimeoutResponse("nbn");
 
             await expect(fetchAzurePullRequestsByProject("nbn")).rejects.toThrowError(
@@ -146,7 +145,7 @@ describe("azure data gatherer", () => {
         });
 
         it("logs expected error when HTTP request times out", async () => {
-            config.httpTimeoutInMS = 1;
+            overrideConfig({ httpTimeoutInMS: 1 });
             setAzurePullRequestThreadsTimeoutResponse("nbn", 3454);
 
             await expect(fetchPullRequestNotes("nbn", 3454)).rejects.toThrowError(

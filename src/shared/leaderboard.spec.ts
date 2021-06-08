@@ -5,7 +5,7 @@ import { MOCK_PULL_REQUESTS_AZURE } from "../../test-utils/azure/mock-pull-reque
 import { setGitlabRequestMocks } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { MOCK_PULL_REQUESTS_GITLAB } from "../../test-utils/gitlab/mock-pull-requests";
 import { MOCK_PULL_REQUESTS_ALL } from "../../test-utils/shared/mock-pull-requests";
-import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
 import { getConfig } from "../config";
 
 import { calculateAndShowLeaderboard, getAllPullRequestData } from "./leaderboard";
@@ -52,7 +52,7 @@ describe("leaderboard", () => {
 
         describe("if only Azure is enabled", () => {
             beforeEach(() => {
-                config.gitlab.enabled = false;
+                overrideConfig({ gitlab: { enabled: false } });
             });
 
             it("returns expected number of pull requests", async () => {
@@ -68,8 +68,8 @@ describe("leaderboard", () => {
 
         describe("if Azure and Gitlab are disabled", () => {
             beforeEach(() => {
-                config.azure.enabled = false;
-                config.gitlab.enabled = false;
+                overrideConfig({ azure: { enabled: false } });
+                overrideConfig({ gitlab: { enabled: false } });
             });
 
             it("returns expected number of pull requests", async () => {

@@ -1,4 +1,5 @@
-import { setConfig } from "../../src/config";
+import { getConfig, setConfig } from "../../src/config";
+import { Config } from "../../src/shared/config.model";
 
 export const setMockConfig = (): void => {
     setConfig({
@@ -16,4 +17,23 @@ export const setMockConfig = (): void => {
         },
         httpTimeoutInMS: 5000,
     });
+};
+
+export const overrideConfig = (newConfig: Partial<Config>): void => {
+    const currentConfig = getConfig();
+
+    const overiddenConfig: Config = {
+        ...currentConfig,
+        ...newConfig,
+        azure: {
+            ...currentConfig.azure,
+            ...newConfig.azure,
+        },
+        gitlab: {
+            ...currentConfig.gitlab,
+            ...newConfig.gitlab,
+        },
+    };
+
+    setConfig(overiddenConfig);
 };

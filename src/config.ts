@@ -1,5 +1,6 @@
-import { Config } from "./shared/config.model";
 import defaultConfig from "../code-review-leaderboard.config";
+
+import { Config } from "./shared/config.model";
 
 let selectedConfig = defaultConfig;
 

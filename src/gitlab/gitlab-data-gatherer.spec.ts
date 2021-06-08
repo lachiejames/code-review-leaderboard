@@ -1,6 +1,5 @@
 import { cleanAll } from "nock";
 
-import config from "../../code-review-leaderboard.config";
 import {
     setGitlabFullPageMockResponse,
     setGitlabPullRequestErrorResponse,
@@ -10,6 +9,7 @@ import {
     setGitlabRequestMocks,
 } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { getConfig } from "../config";
 
 import { fetchAllGitlabPullRequestData, fetchGitlabPullRequestNoteData } from "./gitlab-data-gatherer";
 import { GitlabPullRequestData, GitlabPullRequestNoteData } from "./gitlab-models";

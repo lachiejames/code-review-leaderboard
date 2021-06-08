@@ -1,6 +1,5 @@
 import { cleanAll } from "nock";
 
-import config from "../../code-review-leaderboard.config";
 import {
     setAzurePullRequestThreadsTimeoutResponse,
     setAzurePullRequestTimeoutResponse,
@@ -9,6 +8,7 @@ import {
     setAzureRequestMocks,
 } from "../../test-utils/azure/azure-request-mocks";
 import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { getConfig } from "../config";
 
 import { fetchAzurePullRequestsByProject, fetchAzureRepositoryData, fetchPullRequestNotes } from "./azure-data-gatherer";
 import { AzurePullRequest, AzurePullRequestNote, AzureRepository } from "./azure-models";

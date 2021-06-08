@@ -1,5 +1,5 @@
-import config from "../../code-review-leaderboard.config";
 import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { getConfig } from "../config";
 
 import { verifyConfig } from "./config-verifier";
 

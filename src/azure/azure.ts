@@ -1,6 +1,6 @@
 import { isWithinInterval } from "date-fns";
 
-import config from "../../code-review-leaderboard.config";
+import { getConfig } from "../config";
 import { PullRequest } from "../shared/pull-request.model";
 import { logNoteCount } from "../shared/shared-logger";
 
@@ -16,7 +16,7 @@ import { AzurePullRequest, AzurePullRequestNote, AzureRepository } from "./azure
 
 const inConfigDateRange = (prDateString: string): boolean => {
     const prDate = new Date(prDateString);
-    const allowedDateRange: Interval = { start: config.startDate, end: config.endDate };
+    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
 
     return isWithinInterval(prDate, allowedDateRange);
 };

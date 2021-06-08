@@ -1,6 +1,6 @@
 import { GaxiosError, GaxiosResponse, request } from "gaxios";
 
-import config from "../../code-review-leaderboard.config";
+import { getConfig } from "../config";
 
 import {
     AzureHttpHeaders,
@@ -14,7 +14,7 @@ import {
 } from "./azure-models";
 
 const getBase64PAT = (): string => {
-    const token = `:${config.azure.personalAccessToken}`;
+    const token = `:${getConfig().azure.personalAccessToken}`;
     const tokenBase64: string = Buffer.from(token).toString("base64");
     return tokenBase64;
 };
@@ -41,9 +41,9 @@ const handleErrorResponse = (response: GaxiosError): void => {
     const baseErrorMessage = `Azure responded with ${response.response.status} - ${response.response.statusText}`;
 
     if (response.response.status === 401) {
-        throw Error(`${baseErrorMessage}, which likely means that you do not have permission to access ${config.azure.baseURL}`);
+        throw Error(`${baseErrorMessage}, which likely means that you do not have permission to access ${getConfig().azure.baseURL}`);
     } else if (response.response.status === 404) {
-        throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${config.azure.baseURL}) is invalid`);
+        throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${getConfig().azure.baseURL}) is invalid`);
     } else {
         throw Error(baseErrorMessage);
     }
@@ -67,11 +67,11 @@ export const fetchPullRequestNotes = async (projectName: string, pullRequestID: 
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestNoteResponse> | undefined;
 
     await request<AzurePullRequestNoteResponse>({
-        baseUrl: config.azure.baseURL,
+        baseUrl: getConfig().azure.baseURL,
         url: `/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`,
         method: "GET",
         headers: getAzureHttpHeaders(),
-        timeout: config.httpTimeoutInMS,
+        timeout: getConfig().httpTimeoutInMS,
         retry: true,
     })
         .then((response: GaxiosResponse<AzurePullRequestNoteResponse>) => {
@@ -87,12 +87,12 @@ export const fetchAzurePullRequestsByProject = async (projectName: string): Prom
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestResponse> | undefined;
 
     await request<AzurePullRequestResponse>({
-        baseUrl: config.azure.baseURL,
+        baseUrl: getConfig().azure.baseURL,
         url: `/${projectName}/_apis/git/pullrequests`,
         method: "GET",
         params: getAzureHttpParams(),
         headers: getAzureHttpHeaders(),
-        timeout: config.httpTimeoutInMS,
+        timeout: getConfig().httpTimeoutInMS,
         retry: true,
     })
         .then((response: GaxiosResponse<AzurePullRequestResponse>) => {
@@ -108,11 +108,11 @@ export const fetchAzureRepositoryData = async (): Promise<AzureRepository[]> => 
     let repositoryLookupResponse: GaxiosResponse<AzureRepositoryResponse> | undefined;
 
     await request<AzureRepositoryResponse>({
-        baseUrl: config.azure.baseURL,
+        baseUrl: getConfig().azure.baseURL,
         url: `/_apis/git/repositories`,
         method: "GET",
         headers: getAzureHttpHeaders(),
-        timeout: config.httpTimeoutInMS,
+        timeout: getConfig().httpTimeoutInMS,
         retry: true,
     })
         .then((response: GaxiosResponse<AzureRepositoryResponse>) => {

@@ -1,12 +1,12 @@
 import MockConsole from "jest-mock-console";
 
-import config from "../../code-review-leaderboard.config";
 import { setAzureRequestMocks } from "../../test-utils/azure/azure-request-mocks";
 import { MOCK_PULL_REQUESTS_AZURE } from "../../test-utils/azure/mock-pull-requests";
 import { setGitlabRequestMocks } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { MOCK_PULL_REQUESTS_GITLAB } from "../../test-utils/gitlab/mock-pull-requests";
 import { MOCK_PULL_REQUESTS_ALL } from "../../test-utils/shared/mock-pull-requests";
 import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { getConfig } from "../config";
 
 import { calculateAndShowLeaderboard, getAllPullRequestData } from "./leaderboard";
 import { PullRequest } from "./pull-request.model";
@@ -36,7 +36,7 @@ describe("leaderboard", () => {
 
         describe("if only Gitlab is enabled", () => {
             beforeEach(() => {
-                config.azure.enabled = false;
+                getConfig().azure.enabled = false;
             });
 
             it("returns expected number of pull requests", async () => {

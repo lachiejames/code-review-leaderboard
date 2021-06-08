@@ -1,31 +1,31 @@
 import { format, isBefore } from "date-fns";
 
-import config from "../../code-review-leaderboard.config";
+import { getConfig } from "../config";
 
 const verifyAzureConfig = (): void => {
-    if (config.azure.baseURL === "") {
+    if (getConfig().azure.baseURL === "") {
         throw Error(`Azure pull requests are enabled, but you have not set a base URL`);
     }
 
-    if (config.azure.personalAccessToken === "") {
+    if (getConfig().azure.personalAccessToken === "") {
         throw Error(`Azure pull requests are enabled, but you have not set a personal access token`);
     }
 };
 
 const verifyGitlabConfig = (): void => {
-    if (config.gitlab.personalAccessToken === "") {
+    if (getConfig().gitlab.personalAccessToken === "") {
         throw Error(`Gitlab pull requests are enabled, but you have not set a personal access token`);
     }
 
-    if (config.gitlab.baseURL === "") {
+    if (getConfig().gitlab.baseURL === "") {
         throw Error(`Gitlab pull requests are enabled, but you have not set a base URL`);
     }
 };
 
 const verifyDateRange = (): void => {
-    if (isBefore(config.endDate, config.startDate)) {
-        const startDateString: string = format(config.startDate, "dd/MM/yyyy");
-        const endDateString: string = format(config.endDate, "dd/MM/yyyy");
+    if (isBefore(getConfig().endDate, getConfig().startDate)) {
+        const startDateString: string = format(getConfig().startDate, "dd/MM/yyyy");
+        const endDateString: string = format(getConfig().endDate, "dd/MM/yyyy");
         throw Error(`endDate (${endDateString}) cannot be earlier than startDate (${startDateString})`);
     }
 };
@@ -33,11 +33,11 @@ const verifyDateRange = (): void => {
 export const verifyConfig = (): void => {
     verifyDateRange();
 
-    if (config.azure.enabled) {
+    if (getConfig().azure.enabled) {
         verifyAzureConfig();
     }
 
-    if (config.gitlab.enabled) {
+    if (getConfig().gitlab.enabled) {
         verifyGitlabConfig();
     }
 };

@@ -20,6 +20,7 @@
         "@semantic-release/release-notes-generator": "9.0.2",
         "@types/jest": "26.0.23",
         "@types/node": "15.0.2",
+        "@types/prompts": "2.0.12",
         "@typescript-eslint/eslint-plugin": "4.23.0",
         "@typescript-eslint/parser": "4.23.0",
         "eslint": "7.23.0",
@@ -41,7 +42,7 @@
         "semantic-release": "semantic-release"
     },
     "bin": {
-        "code-review-leaderboard": "./cli.js"
+        "code-review-leaderboard": "./lib/src/cli.js"
     },
     "directories": {
         "lib": "lib"

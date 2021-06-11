@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+
 import defaultConfig from "../code-review-leaderboard.config";
 
 import { Config } from "./shared/config.model";
@@ -13,20 +15,6 @@ export const setConfig = (newConfig: Config): void => {
 };
 
 export const overrideConfig = (newConfig: Partial<Config>): void => {
-    const currentConfig = getConfig();
-
-    const overiddenConfig: Config = {
-        ...currentConfig,
-        ...newConfig,
-        azure: {
-            ...currentConfig.azure,
-            ...newConfig.azure,
-        },
-        gitlab: {
-            ...currentConfig.gitlab,
-            ...newConfig.gitlab,
-        },
-    };
-
+    const overiddenConfig: Config = merge(getConfig(), newConfig);
     setConfig(overiddenConfig);
 };

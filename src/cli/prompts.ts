@@ -37,7 +37,7 @@ export const getEndDate = async (startDate: Date): Promise<Date> => {
     return promptData[PROMPT_NAME];
 };
 
-export const getOrganisations = async (): Promise<string[]> => {
+export const getPlatforms = async (): Promise<string[]> => {
     const promptData: Answers<PromptType> = await prompts({
         type: "multiselect",
         name: PROMPT_NAME,
@@ -125,9 +125,9 @@ export const getConfigFromCli = async (): Promise<Config> => {
     config.startDate = await getStartDate();
     config.endDate = await getEndDate(config.startDate);
 
-    const orgs: string[] = await getOrganisations();
-    config.azure.enabled = orgs.includes("Azure");
-    config.gitlab.enabled = orgs.includes("Gitlab");
+    const platforms: string[] = await getPlatforms();
+    config.azure.enabled = platforms.includes("Azure");
+    config.gitlab.enabled = platforms.includes("Gitlab");
 
     if (config.azure.enabled) {
         config.azure.baseUrl = await getAzureBaseUrl();

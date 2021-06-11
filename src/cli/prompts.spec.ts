@@ -9,7 +9,7 @@ import {
     getEndDate,
     getGitlabAccessToken,
     getGitlabBaseUrl,
-    getOrganisations,
+    getPlatforms,
     getStartDate,
 } from "./prompts";
 
@@ -34,9 +34,9 @@ describe("cli config", () => {
         expect(await getEndDate(startDate)).toEqual(endDate);
     });
 
-    it("getOrganisations() returns the selected organisations", async () => {
+    it("getPlatforms() returns the selected platforms", async () => {
         prompts.inject([["Azure", "Gitlab"]]);
-        expect(await getOrganisations()).toEqual(["Azure", "Gitlab"]);
+        expect(await getPlatforms()).toEqual(["Azure", "Gitlab"]);
     });
 
     it("getAzureBaseUrl() returns the provided url", async () => {

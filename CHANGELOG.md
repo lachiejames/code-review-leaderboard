@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.0...v1.2.1) (2021-06-11)
+
+
+### Bug Fixes
+
+* Add missing dependency ([5f36950](https://github.com/lachiejames/code-review-leaderboard/commit/5f36950e225013c5c6097fa3a7e0c12567bc13e4))
+
 # [1.2.0](https://github.com/lachiejames/code-review-leaderboard/compare/v1.1.1...v1.2.0) (2021-06-11)
 
 

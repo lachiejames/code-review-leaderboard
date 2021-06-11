@@ -1,6 +1,5 @@
 import { cleanAll } from "nock";
 
-import config from "../../code-review-leaderboard.config";
 import {
     setGitlabFullPageMockResponse,
     setGitlabPullRequestErrorResponse,
@@ -10,6 +9,7 @@ import {
     setGitlabRequestMocks,
 } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { overrideConfig } from "../config";
 
 import { fetchAllGitlabPullRequestData, fetchGitlabPullRequestNoteData } from "./gitlab-data-gatherer";
 import { GitlabPullRequestData, GitlabPullRequestNoteData } from "./gitlab-models";
@@ -55,7 +55,7 @@ describe("gitlab data gatherer", () => {
             });
 
             it("throws expected error when HTTP request times out", async () => {
-                config.httpTimeoutInMS = 1;
+                overrideConfig({ httpTimeoutInMS: 1 });
                 setGitlabPullRequestTimeoutResponse();
 
                 await expect(fetchAllGitlabPullRequestData()).rejects.toThrowError(
@@ -110,7 +110,7 @@ describe("gitlab data gatherer", () => {
         });
 
         it("logs expected error when HTTP request times out", async () => {
-            config.httpTimeoutInMS = 1;
+            overrideConfig({ httpTimeoutInMS: 1 });
             setGitlabPullRequestNotesTimeoutResponse(56, 2102);
 
             await expect(fetchGitlabPullRequestNoteData(56, 2102)).rejects.toThrowError(

@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { TableUserConfig, table } from "table";
 
-import config from "../../code-review-leaderboard.config";
+import { getConfig } from "../config";
 import { NoteType } from "../shared/note-type.enum";
 import { Result } from "../shared/result.model";
 
@@ -20,7 +20,7 @@ const getTableConfig = (): TableUserConfig => {
             alignment: "center",
         },
         header: {
-            content: `CODE REVIEW LEADERBOARD\n\n${formatDate(config.startDate)} - ${formatDate(config.endDate)}`,
+            content: `CODE REVIEW LEADERBOARD\n\n${formatDate(getConfig().startDate)} - ${formatDate(getConfig().endDate)}`,
         },
     };
 };

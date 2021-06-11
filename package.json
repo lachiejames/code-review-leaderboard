@@ -10,7 +10,8 @@
         "gaxios": "4.2.1",
         "ora": "5.4.0",
         "prompts": "2.4.1",
-        "table": "6.7.1"
+        "table": "6.7.1",
+        "url-regex": "5.0.0"
     },
     "devDependencies": {
         "@semantic-release/changelog": "5.0.1",

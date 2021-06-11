@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
 import { addDays, format, isBefore } from "date-fns";
+import { config } from "process";
 import prompts, { Answers } from "prompts";
-import { getConfig, overrideConfig } from "./config";
+import urlRegex from "url-regex";
+import { getConfig, overrideConfig, setConfig } from "./config";
+import { Config } from "./shared/config.model";
 import { run } from "./shared/leaderboard";
 import { logError } from "./shared/shared-logger";
 
@@ -17,6 +20,29 @@ export const validateEndDate = (startDate: Date, endDate: Date): string | boolea
         const endDateString = format(endDate, "dd/MM/yyyy");
 
         return `endDate (${endDateString}) cannot be earlier than startDate (${startDateString})`;
+    } else {
+        return true;
+    }
+};
+
+export const validateUrl = (url: string): string | boolean => {
+    const isValidUrl: boolean = urlRegex().test(url);
+    const isEmptyUrl: boolean = url.length === 0;
+
+    if (isValidUrl) {
+        return true;
+    } else if (isEmptyUrl) {
+        return "You must enter a URL";
+    } else {
+        return "That URL is invalid";
+    }
+};
+
+export const validatePersonalAccessToken = (token: string): string | boolean => {
+    const isEmptyString: boolean = token.length === 0;
+
+    if (isEmptyString) {
+        return "You must enter your personal access token";
     } else {
         return true;
     }
@@ -71,13 +97,7 @@ export const getAzureBaseURL = async () => {
         type: "text",
         message: "Enter your Azure organisation's base URL: ",
         hint: "e.g. https://dev.azure.com/myOrg/",
-        validate: (val) => {
-            if (val.length === 0) {
-                return "You must enter a URL";
-            } else {
-                return true;
-            }
-        },
+        validate: (url: string) => validateUrl(url),
     });
 
     return promptData[PROMPT_NAME];
@@ -89,13 +109,7 @@ export const getAzureAccessToken = async () => {
         type: "text",
         message: "Enter your Azure personal access token: ",
         hint: "e.g. 3Ccz4G6QPilk",
-        validate: (val) => {
-            if (val.length === 0) {
-                return "You must enter a value";
-            } else {
-                return true;
-            }
-        },
+        validate: (token: string) => validatePersonalAccessToken(token),
     });
 
     return promptData[PROMPT_NAME];
@@ -107,13 +121,7 @@ export const getGitlabBaseURL = async () => {
         type: "text",
         message: "Enter your Gitlab organisation's base URL: ",
         hint: "e.g. https://gitlab.example.com/",
-        validate: (val) => {
-            if (val.length === 0) {
-                return "You must enter a value";
-            } else {
-                return true;
-            }
-        },
+        validate: (url: string) => validateUrl(url),
     });
 
     return promptData[PROMPT_NAME];
@@ -125,61 +133,54 @@ export const getGitlabAccessToken = async () => {
         type: "text",
         message: "Enter your Gitlab personal access token: ",
         hint: "e.g. Hf4sXcfn7M69",
-        validate: (val) => {
-            if (val.length === 0) {
-                return "You must enter a value";
-            } else {
-                return true;
-            }
-        },
+        validate: (token: string) => validatePersonalAccessToken(token),
     });
 
     return promptData[PROMPT_NAME];
 };
 
-export const getConfigFromCli = async (): Promise<void> => {
-    try {
-        const startDate: Date = await getStartDate();
-        const endDate: Date = await getEndDate(startDate);
-        const orgs: string[] = await getOrganisations();
-        const azureEnabled = orgs.includes("Azure");
-        const gitlabEnabled = orgs.includes("Gitlab");
-
-        overrideConfig({
-            startDate: startDate,
-            endDate: endDate,
-            azure: { ...getConfig().azure, enabled: azureEnabled },
-            gitlab: { ...getConfig().gitlab, enabled: gitlabEnabled },
-        });
-
-        if (azureEnabled) {
-            const azureBaseUrl: string = await getAzureBaseURL();
-            const azureAccessToken: string = await getAzureAccessToken();
-
-            overrideConfig({
-                azure: {
-                    ...getConfig().azure,
-                    baseURL: azureBaseUrl,
-                    personalAccessToken: azureAccessToken,
-                },
-            });
-        }
-
-        if (gitlabEnabled) {
-            const gitlabBaseUrl: string = await getGitlabBaseURL();
-            const gitlabAccessToken: string = await getGitlabAccessToken();
-
-            overrideConfig({
-                gitlab: {
-                    ...getConfig().gitlab,
-                    baseURL: gitlabBaseUrl,
-                    personalAccessToken: gitlabAccessToken,
-                },
-            });
-        }
-    } catch (error) {
-        logError(error);
-    }
+const getEmptyConfig = (): Config => {
+    return {
+        startDate: new Date(),
+        endDate: new Date(),
+        azure: {
+            enabled: false,
+            baseURL: "",
+            personalAccessToken: "",
+        },
+        gitlab: {
+            enabled: false,
+            baseURL: "",
+            personalAccessToken: "",
+        },
+        httpTimeoutInMS: 5000,
+    };
 };
 
-getConfigFromCli().then((_) => run());
+export const getConfigFromCli = async (): Promise<Config> => {
+    const config: Config = getEmptyConfig();
+
+    config.startDate = await getStartDate();
+    config.endDate = await getEndDate(config.startDate);
+
+    const orgs: string[] = await getOrganisations();
+    config.azure.enabled = orgs.includes("Azure");
+    config.gitlab.enabled = orgs.includes("Gitlab");
+
+    if (config.azure.enabled) {
+        config.azure.baseURL = await getAzureBaseURL();
+        config.azure.personalAccessToken = await getAzureAccessToken();
+    }
+
+    if (config.gitlab.enabled) {
+        config.gitlab.baseURL = await getGitlabBaseURL();
+        config.gitlab.personalAccessToken = await getGitlabAccessToken();
+    }
+
+    return config;
+};
+
+getConfigFromCli().then((config) => {
+    setConfig(config);
+    run();
+});

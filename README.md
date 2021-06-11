@@ -4,13 +4,17 @@
 
 ## Running from the command line
 
+### Installing
+
 Install `code-review-leaderboard` globally using npm:
 
 ```
 npm install -g code-review-leaderboard
 ```
 
-Then you can set up your configuration from the command line using:
+### Setting up your configuration and running locally
+
+You can set up your configuration from the command line using:
 
 ```
 code-review-leaderboard
@@ -18,7 +22,11 @@ code-review-leaderboard
 
 It will then fetch the pull request data from the selected organisations, using the provided credentials. If successful, it will print out a leaderboard that looks like this:
 
-![Example results](/assets/example-results.png?raw=true "Example results")
+![Example results](/assets/example-results.png?raw=true)
+
+### Demo
+
+![Video demo](/assets/demo.mp4?raw=true)
 
 ## Running in TypeScript
 

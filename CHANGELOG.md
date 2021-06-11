@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/lachiejames/code-review-leaderboard/compare/v1.1.1...v1.2.0) (2021-06-11)
+
+
+### Features
+
+* Allow cli configuration ([c3b6291](https://github.com/lachiejames/code-review-leaderboard/commit/c3b6291f64eee33c83abd16702737882f893ce8e))
+
 ## [1.1.1](https://github.com/lachiejames/code-review-leaderboard/compare/v1.1.0...v1.1.1) (2021-06-05)
 
 

@@ -11,7 +11,18 @@ import { logError } from "./shared/shared-logger";
 const PROMPT_NAME = "value";
 type PromptType = "value";
 
-const setStartDate = async () => {
+export const validateEndDate = (startDate: Date, endDate: Date): string | boolean => {
+    if (isBefore(endDate, startDate)) {
+        const startDateString = format(startDate, "dd/MM/yyyy");
+        const endDateString = format(endDate, "dd/MM/yyyy");
+
+        return `endDate (${endDateString}) cannot be earlier than startDate (${startDateString})`;
+    } else {
+        return true;
+    }
+};
+
+export const getStartDate = async () => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "date",
@@ -23,7 +34,7 @@ const setStartDate = async () => {
     return promptData[PROMPT_NAME];
 };
 
-const setEndDate = async (startDate: Date) => {
+export const getEndDate = async (startDate: Date) => {
     const datePlus2Weeks = addDays(new Date(startDate), 14);
 
     const promptData: Answers<PromptType> = await prompts({
@@ -32,22 +43,13 @@ const setEndDate = async (startDate: Date) => {
         message: "Enter an end date: ",
         initial: datePlus2Weeks,
         mask: "DD-MM-YYYY",
-        validate: (endDate) => {
-            if (isBefore(endDate, startDate)) {
-                const startDateString = format(startDate, "dd/MM/yyyy");
-                const endDateString = format(endDate, "dd/MM/yyyy");
-
-                return `endDate (${endDateString}) cannot be earlier than startDate (${startDateString})`;
-            } else {
-                return true;
-            }
-        },
+        validate: (endDate: Date) => validateEndDate(startDate, endDate),
     });
 
     return promptData[PROMPT_NAME];
 };
 
-const setOrganisations = async () => {
+export const getOrganisations = async () => {
     const promptData: Answers<PromptType> = await prompts({
         type: "multiselect",
         name: PROMPT_NAME,
@@ -63,7 +65,7 @@ const setOrganisations = async () => {
     return promptData[PROMPT_NAME];
 };
 
-const setAzureBaseURL = async () => {
+export const getAzureBaseURL = async () => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -81,7 +83,7 @@ const setAzureBaseURL = async () => {
     return promptData[PROMPT_NAME];
 };
 
-const setAzureAccessToken = async () => {
+export const getAzureAccessToken = async () => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -99,7 +101,7 @@ const setAzureAccessToken = async () => {
     return promptData[PROMPT_NAME];
 };
 
-const setGitlabBaseURL = async () => {
+export const getGitlabBaseURL = async () => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -117,7 +119,7 @@ const setGitlabBaseURL = async () => {
     return promptData[PROMPT_NAME];
 };
 
-const setGitlabAccessToken = async () => {
+export const getGitlabAccessToken = async () => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -135,11 +137,11 @@ const setGitlabAccessToken = async () => {
     return promptData[PROMPT_NAME];
 };
 
-const getConfigFromCli = async (): Promise<void> => {
+export const getConfigFromCli = async (): Promise<void> => {
     try {
-        const startDate: Date = await setStartDate();
-        const endDate: Date = await setEndDate(startDate);
-        const orgs: string[] = await setOrganisations();
+        const startDate: Date = await getStartDate();
+        const endDate: Date = await getEndDate(startDate);
+        const orgs: string[] = await getOrganisations();
         const azureEnabled = orgs.includes("Azure");
         const gitlabEnabled = orgs.includes("Gitlab");
 
@@ -151,8 +153,8 @@ const getConfigFromCli = async (): Promise<void> => {
         });
 
         if (azureEnabled) {
-            const azureBaseUrl: string = await setAzureBaseURL();
-            const azureAccessToken: string = await setAzureAccessToken();
+            const azureBaseUrl: string = await getAzureBaseURL();
+            const azureAccessToken: string = await getAzureAccessToken();
 
             overrideConfig({
                 azure: {
@@ -164,8 +166,8 @@ const getConfigFromCli = async (): Promise<void> => {
         }
 
         if (gitlabEnabled) {
-            const gitlabBaseUrl: string = await setGitlabBaseURL();
-            const gitlabAccessToken: string = await setGitlabAccessToken();
+            const gitlabBaseUrl: string = await getGitlabBaseURL();
+            const gitlabAccessToken: string = await getGitlabAccessToken();
 
             overrideConfig({
                 gitlab: {

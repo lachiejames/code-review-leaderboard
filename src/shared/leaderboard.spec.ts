@@ -52,7 +52,7 @@ describe("leaderboard", () => {
 
         describe("if only Azure is enabled", () => {
             beforeEach(() => {
-                overrideConfig({ gitlab: { enabled: false } });
+                overrideConfig({ gitlab: { ...getConfig().gitlab, enabled: false } });
             });
 
             it("returns expected number of pull requests", async () => {
@@ -68,8 +68,8 @@ describe("leaderboard", () => {
 
         describe("if Azure and Gitlab are disabled", () => {
             beforeEach(() => {
-                overrideConfig({ azure: { enabled: false } });
-                overrideConfig({ gitlab: { enabled: false } });
+                overrideConfig({ azure: { ...getConfig().azure, enabled: false } });
+                overrideConfig({ gitlab: { ...getConfig().gitlab, enabled: false } });
             });
 
             it("returns expected number of pull requests", async () => {

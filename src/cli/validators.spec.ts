@@ -45,15 +45,15 @@ describe("cli config", () => {
     });
 
     describe("validatePersonalAccessToken()", () => {
-        it("if valid url is entered, returns true", () => {
-            expect(validatePersonalAccessToken("5KMzQsQBg5QXenxQ")).toEqual(true);
+        it("if valid token is entered, returns true", () => {
+            expect(validatePersonalAccessToken("Gein9cf2nKsQbfhY44cVLNYR9ZnAgQ9nnkrPAkhXifEFy7LXsTgU")).toEqual(true);
         });
 
-        it("if invalid url is entered, returns error message", () => {
+        it("if invalid token is entered, returns error message", () => {
             expect(validatePersonalAccessToken("invalid token")).toEqual(true);
         });
 
-        it("if no url is entered, returns error message", () => {
+        it("if no token is entered, returns error message", () => {
             expect(validatePersonalAccessToken("")).toEqual("You must enter your personal access token");
         });
     });

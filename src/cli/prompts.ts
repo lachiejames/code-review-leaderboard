@@ -70,7 +70,7 @@ export const getAzureAccessToken = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Azure personal access token: ",
-        hint: "e.g. 3Ccz4G6QPilk",
+        hint: "e.g. Gein9cf2nKsQbfhY44cVLNYR9ZnAgQ9nnkrPAkhXifEFy7LXsTgU",
         validate: (token: string) => validatePersonalAccessToken(token),
     });
 
@@ -94,7 +94,7 @@ export const getGitlabAccessToken = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Gitlab personal access token: ",
-        hint: "e.g. Hf4sXcfn7M69",
+        hint: "e.g. Pz7JLrNsh0746qe3tU2C",
         validate: (token: string) => validatePersonalAccessToken(token),
     });
 

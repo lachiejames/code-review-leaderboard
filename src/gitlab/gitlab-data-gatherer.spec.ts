@@ -8,7 +8,8 @@ import {
     setGitlabPullRequestTimeoutResponse,
     setGitlabRequestMocks,
 } from "../../test-utils/gitlab/gitlab-request-mocks";
-import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
+import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { overrideConfig } from "../config";
 
 import { fetchAllGitlabPullRequestData, fetchGitlabPullRequestNoteData } from "./gitlab-data-gatherer";
 import { GitlabPullRequestData, GitlabPullRequestNoteData } from "./gitlab-models";

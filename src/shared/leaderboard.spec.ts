@@ -5,8 +5,8 @@ import { MOCK_PULL_REQUESTS_AZURE } from "../../test-utils/azure/mock-pull-reque
 import { setGitlabRequestMocks } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { MOCK_PULL_REQUESTS_GITLAB } from "../../test-utils/gitlab/mock-pull-requests";
 import { MOCK_PULL_REQUESTS_ALL } from "../../test-utils/shared/mock-pull-requests";
-import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
-import { getConfig } from "../config";
+import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { getConfig, overrideConfig } from "../config";
 
 import { calculateAndShowLeaderboard, getAllPullRequestData, run } from "./leaderboard";
 import { PullRequest } from "./pull-request.model";

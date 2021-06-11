@@ -1,5 +1,5 @@
-import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
-import { getConfig } from "../config";
+import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { getConfig, overrideConfig } from "../config";
 
 import { verifyConfig } from "./config-verifier";
 

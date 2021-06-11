@@ -7,7 +7,8 @@ import {
     setAzureRepositoryTimeoutResponse,
     setAzureRequestMocks,
 } from "../../test-utils/azure/azure-request-mocks";
-import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
+import { setMockConfig } from "../../test-utils/shared/test-utils";
+import { overrideConfig } from "../config";
 
 import { fetchAzurePullRequestsByProject, fetchAzureRepositoryData, fetchPullRequestNotes } from "./azure-data-gatherer";
 import { AzurePullRequest, AzurePullRequestNote, AzureRepository } from "./azure-models";

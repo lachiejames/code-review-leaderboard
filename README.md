@@ -16,11 +16,15 @@ Then you can set up your configuration from the command line using:
 code-review-leaderboard
 ```
 
+It will then fetch the pull request data from the selected organisations, using the provided credentials. If successful, it will print out a leaderboard that looks like this:
+
+![Example results](/assets/example-results.png?raw=true "Example results")
+
 ## Running in TypeScript
 
 ### Installing
 
-Install the project using
+Install the project using:
 
 ```
 git clone https://github.com/lachiejames/code-review-leaderboard.git
@@ -50,14 +54,20 @@ Installing dependencies:
 yarn
 ```
 
+Compiling to JavaScript:
+
+```
+yarn build
+```
+
+Running with Node:
+
+```
+yarn start
+```
+
 Running tests:
 
 ```
 yarn test
-```
-
-Building and running:
-
-```
-yarn start
 ```

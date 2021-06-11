@@ -39,7 +39,7 @@
     "scripts": {
         "build": "tsc",
         "format": "prettier --write . & eslint . --fix",
-        "start": "yarn build & node .",
+        "start": "node .",
         "test": "jest --coverage --detectOpenHandles --runInBand",
         "semantic-release": "semantic-release"
     },

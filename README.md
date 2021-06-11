@@ -26,7 +26,7 @@ It will then fetch the pull request data from the selected organisations, using 
 
 ### Demo
 
-![Video demo](/assets/demo.mp4?raw=true)
+![Video demo](/assets/demo.gif?raw=true)
 
 ## Running in TypeScript
 

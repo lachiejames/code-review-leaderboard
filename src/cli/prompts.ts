@@ -1,6 +1,8 @@
-import { addDays} from "date-fns";
+import { addDays } from "date-fns";
 import prompts, { Answers } from "prompts";
+
 import { Config } from "../shared/config.model";
+
 import { validateEndDate, validatePersonalAccessToken, validateUrl } from "./validators";
 
 // `prompts` package uses generics which accepts string literal values and then uses those values as types
@@ -8,7 +10,7 @@ import { validateEndDate, validatePersonalAccessToken, validateUrl } from "./val
 const PROMPT_NAME = "value";
 type PromptType = "value";
 
-export const getStartDate = async () => {
+export const getStartDate = async (): Promise<Date> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "date",
@@ -20,7 +22,7 @@ export const getStartDate = async () => {
     return promptData[PROMPT_NAME];
 };
 
-export const getEndDate = async (startDate: Date) => {
+export const getEndDate = async (startDate: Date): Promise<Date> => {
     const datePlus2Weeks = addDays(new Date(startDate), 14);
 
     const promptData: Answers<PromptType> = await prompts({
@@ -35,7 +37,7 @@ export const getEndDate = async (startDate: Date) => {
     return promptData[PROMPT_NAME];
 };
 
-export const getOrganisations = async () => {
+export const getOrganisations = async (): Promise<string[]> => {
     const promptData: Answers<PromptType> = await prompts({
         type: "multiselect",
         name: PROMPT_NAME,
@@ -51,7 +53,7 @@ export const getOrganisations = async () => {
     return promptData[PROMPT_NAME];
 };
 
-export const getAzureBaseURL = async () => {
+export const getAzureBaseURL = async (): Promise<string> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -63,7 +65,7 @@ export const getAzureBaseURL = async () => {
     return promptData[PROMPT_NAME];
 };
 
-export const getAzureAccessToken = async () => {
+export const getAzureAccessToken = async (): Promise<string> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -75,7 +77,7 @@ export const getAzureAccessToken = async () => {
     return promptData[PROMPT_NAME];
 };
 
-export const getGitlabBaseURL = async () => {
+export const getGitlabBaseURL = async (): Promise<string> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
@@ -87,7 +89,7 @@ export const getGitlabBaseURL = async () => {
     return promptData[PROMPT_NAME];
 };
 
-export const getGitlabAccessToken = async () => {
+export const getGitlabAccessToken = async (): Promise<string> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",

@@ -1,6 +1,6 @@
-import prompts from "prompts";
 import { setMockConfig } from "../../test-utils/shared/test-utils";
-import { validateEndDate, validateUrl, validatePersonalAccessToken } from "./validators";
+
+import { validateEndDate, validatePersonalAccessToken, validateUrl } from "./validators";
 
 describe("cli config", () => {
     beforeEach(() => {

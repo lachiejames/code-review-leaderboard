@@ -1,16 +1,17 @@
 import prompts from "prompts";
+
 import { setMockConfig } from "../../test-utils/shared/test-utils";
+
 import {
-    getStartDate,
-    getEndDate,
-    getOrganisations,
-    getAzureBaseURL,
     getAzureAccessToken,
-    getGitlabBaseURL,
-    getGitlabAccessToken,
+    getAzureBaseURL,
     getConfigFromCli,
+    getEndDate,
+    getGitlabAccessToken,
+    getGitlabBaseURL,
+    getOrganisations,
+    getStartDate,
 } from "./prompts";
-import { validateEndDate, validateUrl, validatePersonalAccessToken } from "./validators";
 
 describe("cli config", () => {
     beforeEach(() => {

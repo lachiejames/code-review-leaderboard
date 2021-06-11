@@ -8,7 +8,7 @@ import { MOCK_PULL_REQUESTS_ALL } from "../../test-utils/shared/mock-pull-reques
 import { overrideConfig, setMockConfig } from "../../test-utils/shared/test-utils";
 import { getConfig } from "../config";
 
-import { calculateAndShowLeaderboard, getAllPullRequestData } from "./leaderboard";
+import { calculateAndShowLeaderboard, getAllPullRequestData, run } from "./leaderboard";
 import { PullRequest } from "./pull-request.model";
 
 describe("leaderboard", () => {
@@ -91,6 +91,39 @@ describe("leaderboard", () => {
 
         it("logs expected data", () => {
             calculateAndShowLeaderboard(MOCK_PULL_REQUESTS_ALL);
+            expect(console.log).toHaveBeenCalledWith(
+                `╔═════════════════════════════════════════════════════════╗\n` +
+                    `║                 CODE REVIEW LEADERBOARD                 ║\n` +
+                    `║                                                         ║\n` +
+                    `║                 26/04/2021 - 07/05/2021                 ║\n` +
+                    `╟──────────────────┬───────────────┬──────────┬───────────╢\n` +
+                    `║       Name       │ Pull Requests │ Comments │ Approvals ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║   John Howard    │       4       │    4     │     2     ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║   Tony Abbott    │       1       │    1     │     2     ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║    Bob Hawke     │       2       │    1     │     1     ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║    Kevin Rudd    │       1       │    1     │     1     ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║ Malcolm Turnbull │       1       │    1     │     0     ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║  Malcolm Fraser  │       2       │    0     │     0     ║\n` +
+                    `╚══════════════════╧═══════════════╧══════════╧═══════════╝\n`,
+            );
+        });
+    });
+
+    describe("run()", () => {
+        beforeEach(() => {
+            MockConsole();
+            setGitlabRequestMocks();
+            setAzureRequestMocks();
+        });
+
+        it("logs expected data", async () => {
+            await run();
             expect(console.log).toHaveBeenCalledWith(
                 `╔═════════════════════════════════════════════════════════╗\n` +
                     `║                 CODE REVIEW LEADERBOARD                 ║\n` +

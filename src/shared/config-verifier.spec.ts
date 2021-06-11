@@ -25,7 +25,7 @@ describe("config verifier", () => {
         });
 
         it("if baseUrl='', an error is thrown", () => {
-            overrideConfig({ azure: { ...getConfig().azure, baseURL: "" } });
+            overrideConfig({ azure: { ...getConfig().azure, baseUrl: "" } });
             expect(() => verifyConfig()).toThrowError("Azure pull requests are enabled, but you have not set a base URL");
         });
 
@@ -38,7 +38,7 @@ describe("config verifier", () => {
             overrideConfig({
                 azure: {
                     enabled: false,
-                    baseURL: "",
+                    baseUrl: "",
                     personalAccessToken: "",
                 },
             });
@@ -52,7 +52,7 @@ describe("config verifier", () => {
         });
 
         it("if baseUrl='', an error is thrown", () => {
-            overrideConfig({ gitlab: { ...getConfig().gitlab, baseURL: "" } });
+            overrideConfig({ gitlab: { ...getConfig().gitlab, baseUrl: "" } });
             expect(() => verifyConfig()).toThrowError("Gitlab pull requests are enabled, but you have not set a base URL");
         });
 
@@ -65,7 +65,7 @@ describe("config verifier", () => {
             overrideConfig({
                 gitlab: {
                     enabled: false,
-                    baseURL: "",
+                    baseUrl: "",
                     personalAccessToken: "",
                 },
             });

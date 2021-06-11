@@ -53,11 +53,11 @@ export const getOrganisations = async (): Promise<string[]> => {
     return promptData[PROMPT_NAME];
 };
 
-export const getAzureBaseURL = async (): Promise<string> => {
+export const getAzureBaseUrl = async (): Promise<string> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
-        message: "Enter your Azure organisation's base URL: ",
+        message: "Enter your Azure organisation's base Url: ",
         hint: "e.g. https://dev.azure.com/myOrg/",
         validate: (url: string) => validateUrl(url),
     });
@@ -77,11 +77,11 @@ export const getAzureAccessToken = async (): Promise<string> => {
     return promptData[PROMPT_NAME];
 };
 
-export const getGitlabBaseURL = async (): Promise<string> => {
+export const getGitlabBaseUrl = async (): Promise<string> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "text",
-        message: "Enter your Gitlab organisation's base URL: ",
+        message: "Enter your Gitlab organisation's base Url: ",
         hint: "e.g. https://gitlab.example.com/",
         validate: (url: string) => validateUrl(url),
     });
@@ -107,12 +107,12 @@ const getEmptyConfig = (): Config => {
         endDate: new Date(),
         azure: {
             enabled: false,
-            baseURL: "",
+            baseUrl: "",
             personalAccessToken: "",
         },
         gitlab: {
             enabled: false,
-            baseURL: "",
+            baseUrl: "",
             personalAccessToken: "",
         },
         httpTimeoutInMS: 5000,
@@ -130,12 +130,12 @@ export const getConfigFromCli = async (): Promise<Config> => {
     config.gitlab.enabled = orgs.includes("Gitlab");
 
     if (config.azure.enabled) {
-        config.azure.baseURL = await getAzureBaseURL();
+        config.azure.baseUrl = await getAzureBaseUrl();
         config.azure.personalAccessToken = await getAzureAccessToken();
     }
 
     if (config.gitlab.enabled) {
-        config.gitlab.baseURL = await getGitlabBaseURL();
+        config.gitlab.baseUrl = await getGitlabBaseUrl();
         config.gitlab.personalAccessToken = await getGitlabAccessToken();
     }
 

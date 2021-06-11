@@ -11,7 +11,7 @@ module.exports = {
         enabled: true,
 
         // The home page for your organisation's gitlab
-        baseURL: "",
+        baseUrl: "",
 
         // Authenticates http requests during lookups
         personalAccessToken: "",
@@ -23,7 +23,7 @@ module.exports = {
         enabled: true,
 
         // The home page for your organisation's gitlab
-        baseURL: "",
+        baseUrl: "",
 
         // Authenticates http requests during lookups
         personalAccessToken: "",

@@ -1,7 +1,7 @@
 interface Platform {
     enabled: boolean;
 
-    baseURL: string;
+    baseUrl: string;
 
     personalAccessToken: string;
 }

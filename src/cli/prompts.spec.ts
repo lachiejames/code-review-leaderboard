@@ -4,11 +4,11 @@ import { setMockConfig } from "../../test-utils/shared/test-utils";
 
 import {
     getAzureAccessToken,
-    getAzureBaseURL,
+    getAzureBaseUrl,
     getConfigFromCli,
     getEndDate,
     getGitlabAccessToken,
-    getGitlabBaseURL,
+    getGitlabBaseUrl,
     getOrganisations,
     getStartDate,
 } from "./prompts";
@@ -39,9 +39,9 @@ describe("cli config", () => {
         expect(await getOrganisations()).toEqual(["Azure", "Gitlab"]);
     });
 
-    it("getAzureBaseURL() returns the provided url", async () => {
+    it("getAzureBaseUrl() returns the provided url", async () => {
         prompts.inject(["https://dev.azure.com/MyOrg"]);
-        expect(await getAzureBaseURL()).toEqual("https://dev.azure.com/MyOrg");
+        expect(await getAzureBaseUrl()).toEqual("https://dev.azure.com/MyOrg");
     });
 
     it("getAzureAccessToken() returns the provided token", async () => {
@@ -49,9 +49,9 @@ describe("cli config", () => {
         expect(await getAzureAccessToken()).toEqual("abc123");
     });
 
-    it("getGitlabBaseURL() returns the provided url", async () => {
+    it("getGitlabBaseUrl() returns the provided url", async () => {
         prompts.inject(["https://gitlab.example.com/"]);
-        expect(await getGitlabBaseURL()).toEqual("https://gitlab.example.com/");
+        expect(await getGitlabBaseUrl()).toEqual("https://gitlab.example.com/");
     });
 
     it("getGitlabAccessToken() returns the provided url", async () => {
@@ -76,12 +76,12 @@ describe("cli config", () => {
                 startDate: new Date("2021-04-26"),
                 endDate: new Date("2021-05-12"),
                 azure: {
-                    baseURL: "https://dev.azure.com/MyOrg",
+                    baseUrl: "https://dev.azure.com/MyOrg",
                     enabled: true,
                     personalAccessToken: "abc123",
                 },
                 gitlab: {
-                    baseURL: "https://gitlab.example.com/",
+                    baseUrl: "https://gitlab.example.com/",
                     enabled: true,
                     personalAccessToken: "cba321",
                 },

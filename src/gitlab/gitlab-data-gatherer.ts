@@ -31,7 +31,7 @@ const handleErrorResponse = (response: GaxiosError): void => {
     const baseErrorMessage = `Gitlab responded with ${response?.code ?? response.message}`;
 
     if (response?.code === "ENOTFOUND") {
-        throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${getConfig().gitlab.baseURL}) is invalid`);
+        throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${getConfig().gitlab.baseUrl}) is invalid`);
     } else if (response.response?.status === 401) {
         throw Error(`${baseErrorMessage}, which likely means that your personal access token is invalid`);
     } else {
@@ -43,7 +43,7 @@ const fetchGitlabPullRequestDataByPage = async (pageNumber: number): Promise<Git
     let pullRequestLookupResponse: GaxiosResponse<GitlabPullRequestData[]> | undefined;
 
     await request<GitlabPullRequestData[]>({
-        baseUrl: getConfig().gitlab.baseURL,
+        baseUrl: getConfig().gitlab.baseUrl,
         url: PULL_REQUEST_LOOKUP_PATH,
         method: "GET",
         params: getGitlabHttpParams(pageNumber),
@@ -61,7 +61,7 @@ export const fetchGitlabPullRequestNoteData = async (projectID: number, pullRequ
     let pullRequestNotesLookupResponse: GaxiosResponse<GitlabPullRequestNoteData[]> | undefined;
 
     await request<GitlabPullRequestNoteData[]>({
-        baseUrl: getConfig().gitlab.baseURL,
+        baseUrl: getConfig().gitlab.baseUrl,
         url: `${PROJECT_LOOKUP_PATH}/${projectID}/merge_requests/${pullRequestID}/notes`,
         method: "GET",
         headers: getGitlabHttpHeaders(),

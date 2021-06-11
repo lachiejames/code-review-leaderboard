@@ -3,7 +3,7 @@ import { format, isBefore } from "date-fns";
 import { getConfig } from "../config";
 
 const verifyAzureConfig = (): void => {
-    if (getConfig().azure.baseURL === "") {
+    if (getConfig().azure.baseUrl === "") {
         throw Error(`Azure pull requests are enabled, but you have not set a base URL`);
     }
 
@@ -17,7 +17,7 @@ const verifyGitlabConfig = (): void => {
         throw Error(`Gitlab pull requests are enabled, but you have not set a personal access token`);
     }
 
-    if (getConfig().gitlab.baseURL === "") {
+    if (getConfig().gitlab.baseUrl === "") {
         throw Error(`Gitlab pull requests are enabled, but you have not set a base URL`);
     }
 };

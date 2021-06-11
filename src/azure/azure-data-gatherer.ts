@@ -41,9 +41,9 @@ const handleErrorResponse = (response: GaxiosError): void => {
     const baseErrorMessage = `Azure responded with ${response.response.status} - ${response.response.statusText}`;
 
     if (response.response.status === 401) {
-        throw Error(`${baseErrorMessage}, which likely means that you do not have permission to access ${getConfig().azure.baseURL}`);
+        throw Error(`${baseErrorMessage}, which likely means that you do not have permission to access ${getConfig().azure.baseUrl}`);
     } else if (response.response.status === 404) {
-        throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${getConfig().azure.baseURL}) is invalid`);
+        throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${getConfig().azure.baseUrl}) is invalid`);
     } else {
         throw Error(baseErrorMessage);
     }
@@ -67,7 +67,7 @@ export const fetchPullRequestNotes = async (projectName: string, pullRequestID: 
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestNoteResponse> | undefined;
 
     await request<AzurePullRequestNoteResponse>({
-        baseUrl: getConfig().azure.baseURL,
+        baseUrl: getConfig().azure.baseUrl,
         url: `/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`,
         method: "GET",
         headers: getAzureHttpHeaders(),
@@ -87,7 +87,7 @@ export const fetchAzurePullRequestsByProject = async (projectName: string): Prom
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestResponse> | undefined;
 
     await request<AzurePullRequestResponse>({
-        baseUrl: getConfig().azure.baseURL,
+        baseUrl: getConfig().azure.baseUrl,
         url: `/${projectName}/_apis/git/pullrequests`,
         method: "GET",
         params: getAzureHttpParams(),
@@ -108,7 +108,7 @@ export const fetchAzureRepositoryData = async (): Promise<AzureRepository[]> => 
     let repositoryLookupResponse: GaxiosResponse<AzureRepositoryResponse> | undefined;
 
     await request<AzureRepositoryResponse>({
-        baseUrl: getConfig().azure.baseURL,
+        baseUrl: getConfig().azure.baseUrl,
         url: `/_apis/git/repositories`,
         method: "GET",
         headers: getAzureHttpHeaders(),

@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Find out who is doing the most code reviews at your organisation",
     "author": "Lachie James",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "main": "lib/src/index.js",
     "dependencies": {
         "date-fns": "2.21.3",

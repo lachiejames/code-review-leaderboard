@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.2...v1.2.3) (2021-06-12)
+
+
+### Bug Fixes
+
+* Remove unused hints ([444b7bc](https://github.com/lachiejames/code-review-leaderboard/commit/444b7bccd379969efdada54b5efa7597bed726b1))
+
 ## [1.2.2](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.1...v1.2.2) (2021-06-12)
 
 

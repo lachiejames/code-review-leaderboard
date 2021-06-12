@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.1...v1.2.2) (2021-06-12)
+
+
+### Bug Fixes
+
+* Add license ([06b7b9c](https://github.com/lachiejames/code-review-leaderboard/commit/06b7b9cd993dded863526049f90571ce33e11173))
+
 ## [1.2.1](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.0...v1.2.1) (2021-06-11)
 
 

@@ -14,7 +14,7 @@ export const getStartDate = async (): Promise<Date> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "date",
-        message: "Enter a start date: ",
+        message: "Choose a start date: ",
         initial: new Date(Date.now()),
         mask: "DD-MM-YYYY",
     });
@@ -28,7 +28,7 @@ export const getEndDate = async (startDate: Date): Promise<Date> => {
     const promptData: Answers<PromptType> = await prompts({
         name: PROMPT_NAME,
         type: "date",
-        message: "Enter an end date: ",
+        message: "Choose an end date: ",
         initial: datePlus2Weeks,
         mask: "DD-MM-YYYY",
         validate: (endDate: Date) => validateEndDate(startDate, endDate),
@@ -41,7 +41,7 @@ export const getPlatforms = async (): Promise<string[]> => {
     const promptData: Answers<PromptType> = await prompts({
         type: "multiselect",
         name: PROMPT_NAME,
-        message: "Choose your platforms: ",
+        message: "Select your platforms: ",
         choices: [
             { title: "Azure", value: "Azure", selected: true },
             { title: "Gitlab", value: "Gitlab" },
@@ -58,7 +58,6 @@ export const getAzureBaseUrl = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Azure organisation's base Url: ",
-        hint: "e.g. https://dev.azure.com/myOrg/",
         validate: (url: string) => validateUrl(url),
     });
 
@@ -70,7 +69,6 @@ export const getAzureAccessToken = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Azure personal access token: ",
-        hint: "e.g. Gein9cf2nKsQbfhY44cVLNYR9ZnAgQ9nnkrPAkhXifEFy7LXsTgU",
         validate: (token: string) => validatePersonalAccessToken(token),
     });
 
@@ -82,7 +80,6 @@ export const getGitlabBaseUrl = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Gitlab organisation's base Url: ",
-        hint: "e.g. https://gitlab.example.com/",
         validate: (url: string) => validateUrl(url),
     });
 
@@ -94,7 +91,6 @@ export const getGitlabAccessToken = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Gitlab personal access token: ",
-        hint: "e.g. Pz7JLrNsh0746qe3tU2C",
         validate: (token: string) => validatePersonalAccessToken(token),
     });
 

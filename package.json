@@ -31,7 +31,7 @@
         "find-root": "1.1.0",
         "jest": "26.6.3",
         "jest-mock-console": "1.1.0",
-        "nock": "13.0.11",
+        "nock": "13.1.0",
         "prettier": "2.3.1",
         "semantic-release": "17.4.3",
         "ts-jest": "26.5.6",

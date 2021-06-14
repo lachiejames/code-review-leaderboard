@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.4...v1.2.5) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gaxios to v4.3.0 ([#20](https://github.com/lachiejames/code-review-leaderboard/issues/20)) ([3f53f25](https://github.com/lachiejames/code-review-leaderboard/commit/3f53f25fe72a02e2f95ac6b2cffb8ec06143ec77))
+
 ## [1.2.4](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.3...v1.2.4) (2021-06-14)
 
 

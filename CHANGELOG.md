@@ -1,3 +1,11 @@
+## [1.2.4](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.3...v1.2.4) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-fns to v2.22.1 ([#19](https://github.com/lachiejames/code-review-leaderboard/issues/19)) ([0f51e73](https://github.com/lachiejames/code-review-leaderboard/commit/0f51e739d99c83cf41ce5d07adb6fd7efc8f9956))
+* **deps:** update dependency ora to v5.4.1 ([#12](https://github.com/lachiejames/code-review-leaderboard/issues/12)) ([5735884](https://github.com/lachiejames/code-review-leaderboard/commit/5735884f6e244eaeb9c916484a1d9db4f82a7af6))
+
 ## [1.2.3](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.2...v1.2.3) (2021-06-12)
 
 

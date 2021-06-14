@@ -50,6 +50,9 @@
     "directories": {
         "lib": "lib"
     },
+    "files": [
+        "lib/**"
+    ],
     "repository": "https://github.com/lachiejames/code-review-leaderboard.git",
     "keywords": [
         "leaderboard",

@@ -1,3 +1,17 @@
+## [1.2.6](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.5...v1.2.6) (2021-06-14)
+
+
+### Bug Fixes
+
+* Reduce package size ([#23](https://github.com/lachiejames/code-review-leaderboard/issues/23)) ([667aece](https://github.com/lachiejames/code-review-leaderboard/commit/667aece2c0618718176640b07a2d2a5bf27e8260))
+
+## [1.2.5](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.4...v1.2.5) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gaxios to v4.3.0 ([#20](https://github.com/lachiejames/code-review-leaderboard/issues/20)) ([3f53f25](https://github.com/lachiejames/code-review-leaderboard/commit/3f53f25fe72a02e2f95ac6b2cffb8ec06143ec77))
+
 ## [1.2.4](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.3...v1.2.4) (2021-06-14)
 
 

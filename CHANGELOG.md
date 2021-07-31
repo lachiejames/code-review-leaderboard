@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.6...v1.2.7) (2021-07-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-fns to v2.23.0 ([#45](https://github.com/lachiejames/code-review-leaderboard/issues/45)) ([4654788](https://github.com/lachiejames/code-review-leaderboard/commit/465478883ee5ce584fd77caae75b8555f427b309))
+
 ## [1.2.6](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.5...v1.2.6) (2021-06-14)
 
 

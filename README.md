@@ -79,3 +79,8 @@ Running tests:
 ```
 yarn test
 ```
+
+### More info
+
+Check out this blog post that describes `code-review-leaderboard` in further detail:
+https://lachiejames.com/spice-up-code-reviews-at-your-organisation-with-a-leaderboard/

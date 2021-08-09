@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.7...v1.2.8) (2021-08-09)
+
+
+### Bug Fixes
+
+* Update README ([#49](https://github.com/lachiejames/code-review-leaderboard/issues/49)) ([6e3bbca](https://github.com/lachiejames/code-review-leaderboard/commit/6e3bbca3da66c45cab30ffbd61e0157c61aaa2f3))
+
 ## [1.2.7](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.6...v1.2.7) (2021-07-31)
 
 

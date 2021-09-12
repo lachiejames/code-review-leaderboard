@@ -37,34 +37,23 @@ jobs:
               rootFolderOrFile: 'lib'
               includeRootFolder: true
               archiveType: 'zip'
-              archiveFile: 'lib.zip'
+              archiveFile: 'code'
               replaceExistingArchive: true
-
-          - script: |
-              echo "xxx1"
-              ls
-              echo "xxx2"
-              cd lib
-              ls
-              echo "xxx3"
-            displayName: log
 
           - task: S3Upload@1
             inputs:
               awsCredentials: 'lambda-deploy'
               regionName: 'ap-southeast-2'
               bucketName: 'code-review-leaderboard'
-              globExpressions: 'lib.zip'
-              targetFolder: 'code'
+              globExpressions: 'code.zip'
               createBucket: true
 
           - task: LambdaDeployFunction@1
-            condition: eq(variables.isMain, true)
             inputs:
-                awsCredentials: lambda-deploy
-                regionName: ap-southeast-2
-                deploymentMode: codeonly
-                functionName: code-review-leaderboard
-                codeLocation: s3object
-                s3Bucket: code-review-leaderboard
-                s3ObjectKey: lib.zip
+              awsCredentials: 'lambda-deploy'
+              regionName: 'ap-southeast-2'
+              deploymentMode: 'codeonly'
+              functionName: 'code-review-leaderboard'
+              codeLocation: 's3object'
+              s3Bucket: 'code-review-leaderboard'
+              s3ObjectKey: 'code'

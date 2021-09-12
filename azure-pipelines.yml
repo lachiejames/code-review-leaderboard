@@ -32,6 +32,24 @@ jobs:
             condition: eq(variables.isMain, true)
             displayName: Semantic Release
 
+          - task: ArchiveFiles@2
+            condition: eq(variables.isMain, true)
+            inputs:
+                rootFolderOrFile: lib
+                includeRootFolder: true
+                archiveType: zip
+                archiveFile: code
+                replaceExistingArchive: true
+
+          - task: S3Upload@1
+            condition: eq(variables.isMain, true)
+            inputs:
+                awsCredentials: lambda-deploy
+                regionName: ap-southeast-2
+                bucketName: code-review-leaderboard
+                globExpressions: code.zip
+                createBucket: true
+
           - task: LambdaDeployFunction@1
             condition: eq(variables.isMain, true)
             inputs:
@@ -41,4 +59,4 @@ jobs:
                 functionName: code-review-leaderboard
                 codeLocation: s3object
                 s3Bucket: code-review-leaderboard
-                s3ObjectKey: lib.zip
+                s3ObjectKey: code.zip

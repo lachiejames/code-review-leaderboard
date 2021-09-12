@@ -37,6 +37,7 @@ jobs:
               awsCredentials: 'lambda-deploy'
               regionName: 'ap-southeast-2'
               bucketName: 'code-review-leaderboard'
+              sourceFolder: '$(Build.ArtifactStagingDirectory)'
               globExpressions: '**'
               createBucket: true
 

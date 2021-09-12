@@ -16,6 +16,12 @@ jobs:
           - script: yarn build
             displayName: Build
 
+          - script: |
+                ls
+                cd $(Build.ArtifactStagingDirectory)
+                ls
+            displayName: log
+
           - script: yarn test
             displayName: Test
 

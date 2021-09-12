@@ -33,6 +33,7 @@ jobs:
             displayName: Semantic Release
 
           - task: LambdaDeployFunction@1
+            condition: eq(variables.isMain, true)
             inputs:
               awsCredentials: 'lambda-deploy'
               regionName: 'ap-southeast-2'

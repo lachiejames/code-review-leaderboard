@@ -37,7 +37,7 @@ jobs:
               rootFolderOrFile: 'lib'
               includeRootFolder: true
               archiveType: 'zip'
-              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              archiveFile: 'lib.zip'
               replaceExistingArchive: true
 
           - script: |

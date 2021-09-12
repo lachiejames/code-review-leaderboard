@@ -39,6 +39,7 @@ jobs:
               bucketName: 'code-review-leaderboard'
               sourceFolder: 'lib'
               globExpressions: '**'
+              targetFolder: 'code'
               createBucket: true
 
           - task: LambdaDeployFunction@1

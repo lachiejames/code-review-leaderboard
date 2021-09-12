@@ -40,11 +40,21 @@ jobs:
               archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
               replaceExistingArchive: true
 
+          - script: |
+              echo "xxx1"
+              ls
+              echo "xxx2"
+              cd lib
+              ls
+              echo "xxx3"
+            displayName: log
+
           - task: S3Upload@1
             inputs:
               awsCredentials: 'lambda-deploy'
               regionName: 'ap-southeast-2'
               bucketName: 'code-review-leaderboard'
+              sourceFolder: 'lib'
               globExpressions: 'lib.zip'
               targetFolder: 'code'
               createBucket: true

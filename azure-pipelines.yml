@@ -33,14 +33,15 @@ jobs:
             displayName: Semantic Release
 
           - task: S3Upload@1
+            condition: eq(variables.isMain, true)
             inputs:
-              awsCredentials: 'lambda-deploy'
-              regionName: 'ap-southeast-2'
-              bucketName: 'code-review-leaderboard'
-              sourceFolder: 'lib'
-              globExpressions: '**'
-              targetFolder: 'code'
-              createBucket: true
+                awsCredentials: lambda-deploy
+                regionName: ap-southeast-2
+                bucketName: code-review-leaderboard
+                sourceFolder: lib
+                globExpressions: "**"
+                targetFolder: code
+                createBucket: true
 
           - task: LambdaDeployFunction@1
             condition: eq(variables.isMain, true)

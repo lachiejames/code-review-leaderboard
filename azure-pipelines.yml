@@ -16,12 +16,6 @@ jobs:
           - script: yarn build
             displayName: Build
 
-          - script: |
-                ls
-                cd $(Build.ArtifactStagingDirectory)
-                ls
-            displayName: log
-
           - script: yarn test
             displayName: Test
 
@@ -43,7 +37,7 @@ jobs:
               awsCredentials: 'lambda-deploy'
               regionName: 'ap-southeast-2'
               bucketName: 'code-review-leaderboard'
-              sourceFolder: '$(Build.ArtifactStagingDirectory)'
+              sourceFolder: '**/lib/**'
               globExpressions: '**'
               createBucket: true
 

@@ -54,7 +54,6 @@ jobs:
               awsCredentials: 'lambda-deploy'
               regionName: 'ap-southeast-2'
               bucketName: 'code-review-leaderboard'
-              sourceFolder: 'lib'
               globExpressions: 'lib.zip'
               targetFolder: 'code'
               createBucket: true

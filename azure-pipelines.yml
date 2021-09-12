@@ -31,3 +31,11 @@ jobs:
                 NPM_TOKEN: $(NPM_TOKEN)
             condition: eq(variables.isMain, true)
             displayName: Semantic Release
+
+          - task: LambdaDeployFunction@1
+            inputs:
+              awsCredentials: 'lambda-deploy'
+              regionName: 'ap-southeast-2'
+              deploymentMode: 'codeonly'
+              functionName: 'code-review-leaderboard'
+              codeLocation: 'localfile'

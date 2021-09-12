@@ -38,4 +38,6 @@ jobs:
               regionName: 'ap-southeast-2'
               deploymentMode: 'codeonly'
               functionName: 'code-review-leaderboard'
-              codeLocation: 'localfile'
+              codeLocation: 's3object'
+              s3Bucket: 'code-review-leaderboard'
+              s3ObjectKey: 'lib.zip'

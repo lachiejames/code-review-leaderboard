@@ -7,7 +7,7 @@ jobs:
     - job: Test
       timeoutInMinutes: 20
       pool:
-          vmImage: "macOS-latest"
+          vmImage: macOS-latest
 
       steps:
           - script: yarn --network-timeout 100000
@@ -35,10 +35,10 @@ jobs:
           - task: LambdaDeployFunction@1
             condition: eq(variables.isMain, true)
             inputs:
-              awsCredentials: 'lambda-deploy'
-              regionName: 'ap-southeast-2'
-              deploymentMode: 'codeonly'
-              functionName: 'code-review-leaderboard'
-              codeLocation: 's3object'
-              s3Bucket: 'code-review-leaderboard'
-              s3ObjectKey: 'lib.zip'
+                awsCredentials: lambda-deploy
+                regionName: ap-southeast-2
+                deploymentMode: codeonly
+                functionName: code-review-leaderboard
+                codeLocation: s3object
+                s3Bucket: code-review-leaderboard
+                s3ObjectKey: lib.zip

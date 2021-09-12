@@ -56,4 +56,4 @@ jobs:
               functionName: 'code-review-leaderboard'
               codeLocation: 's3object'
               s3Bucket: 'code-review-leaderboard'
-              s3ObjectKey: 'code'
+              s3ObjectKey: 'code.zip'

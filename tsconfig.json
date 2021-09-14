@@ -29,6 +29,6 @@
         "target": "ES2015"
     },
     "exclude": ["lib/**/*", "node_modules", "**/*.spec.ts", "**/*.test.ts", "babel.config.js", "__mocks__", "coverage"],
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts", "handler.js"],
     "lib": ["ES2015", "DOM"]
 }

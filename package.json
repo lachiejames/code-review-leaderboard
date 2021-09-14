@@ -4,7 +4,7 @@
     "description": "Find out who is doing the most code reviews at your organisation",
     "author": "Lachie James",
     "license": "MIT",
-    "main": "lib/src/index.js",
+    "main": "lib/index.js",
     "dependencies": {
         "date-fns": "2.23.0",
         "gaxios": "4.3.1",
@@ -45,7 +45,7 @@
         "semantic-release": "semantic-release"
     },
     "bin": {
-        "code-review-leaderboard": "./lib/src/cli.js"
+        "code-review-leaderboard": "./lib/cli.js"
     },
     "directories": {
         "lib": "lib"

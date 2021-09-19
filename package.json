@@ -4,7 +4,8 @@
     "description": "Find out who is doing the most code reviews at your organisation",
     "author": "Lachie James",
     "license": "MIT",
-    "main": "lib/src/index.js",
+    "main": "./lib/src/index.js",
+    "types": "./lib/src/index.d.ts",
     "dependencies": {
         "date-fns": "2.23.0",
         "gaxios": "4.3.1",
@@ -16,42 +17,33 @@
     },
     "devDependencies": {
         "@semantic-release/changelog": "5.0.1",
-        "@semantic-release/commit-analyzer": "8.0.1",
         "@semantic-release/git": "9.0.1",
-        "@semantic-release/npm": "7.1.3",
-        "@semantic-release/release-notes-generator": "9.0.3",
         "@types/jest": "27.0.1",
         "@types/lodash": "4.14.172",
         "@types/node": "15.0.2",
         "@types/prompts": "2.0.14",
-        "@typescript-eslint/eslint-plugin": "4.31.0",
-        "@typescript-eslint/parser": "4.31.0",
+        "@typescript-eslint/eslint-plugin": "4.31.1",
+        "@typescript-eslint/parser": "4.31.1",
         "eslint": "7.32.0",
-        "eslint-plugin-import": "2.24.2",
-        "find-root": "1.1.0",
         "jest": "27.1.1",
         "jest-mock-console": "1.1.0",
         "nock": "13.1.3",
-        "prettier": "2.4.0",
-        "semantic-release": "17.4.7",
+        "prettier": "2.4.1",
+        "semantic-release": "18.0.0",
         "ts-jest": "27.0.5",
         "typescript": "4.3.5"
     },
     "scripts": {
         "build": "tsc",
-        "format": "prettier --write . & eslint . --fix",
         "start": "node .",
         "test": "jest --coverage --detectOpenHandles --runInBand",
-        "semantic-release": "semantic-release"
+        "format": "prettier . --write & eslint . --fix"
     },
     "bin": {
         "code-review-leaderboard": "./lib/src/cli.js"
     },
-    "directories": {
-        "lib": "lib"
-    },
     "files": [
-        "lib/**"
+        "**/lib/**"
     ],
     "repository": "https://github.com/lachiejames/code-review-leaderboard.git",
     "keywords": [
@@ -62,29 +54,5 @@
     "bugs": {
         "url": "https://github.com/lachiejames/code-review-leaderboard/issues"
     },
-    "homepage": "https://github.com/lachiejames/code-review-leaderboard#readme",
-    "release": {
-        "branches": [
-            "main"
-        ],
-        "plugins": [
-            "@semantic-release/commit-analyzer",
-            "@semantic-release/npm",
-            "@semantic-release/release-notes-generator",
-            [
-                "@semantic-release/changelog",
-                {
-                    "changelogFile": "CHANGELOG.md"
-                }
-            ],
-            [
-                "@semantic-release/git",
-                {
-                    "assets": [
-                        "CHANGELOG.md"
-                    ]
-                }
-            ]
-        ]
-    }
+    "homepage": "https://github.com/lachiejames/code-review-leaderboard#readme"
 }

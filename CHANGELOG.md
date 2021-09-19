@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.10...v1.2.11) (2021-09-19)
+
+
+### Bug Fixes
+
+* refine dev dependencies ([#80](https://github.com/lachiejames/code-review-leaderboard/issues/80)) ([48c5b28](https://github.com/lachiejames/code-review-leaderboard/commit/48c5b28eac39a1ea14ca3f4c48791bb7da5002df))
+
 ## [1.2.10](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.9...v1.2.10) (2021-09-18)
 
 

@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "moduleResolution": "node",
+        "module": "commonjs",
         "resolveJsonModule": true,
         "target": "ES2020",
         "declaration": true,
@@ -12,6 +12,6 @@
         "forceConsistentCasingInFileNames": true,
         "strict": true
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts", "code-review-leaderboard.config.js"],
     "exclude": ["src/**/*.spec.ts"]
 }

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     // Only allow merge requests created/updated after this date
     startDate: new Date("2021-05-01"),
 

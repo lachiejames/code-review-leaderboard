@@ -11,5 +11,7 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "strict": true
-    }
+    },
+    "include": ["src/**/*.ts"],
+    "exclude": ["src/**/*.spec.ts"]
 }

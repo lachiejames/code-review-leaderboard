@@ -1,3 +1,10 @@
+## [1.2.12](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.11...v1.2.12) (2021-09-19)
+
+
+### Bug Fixes
+
+* resolve lint errors ([78cbc02](https://github.com/lachiejames/code-review-leaderboard/commit/78cbc0288ec8e39b98ef62df15950c71192a5e0e))
+
 ## [1.2.11](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.10...v1.2.11) (2021-09-19)
 
 

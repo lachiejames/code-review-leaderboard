@@ -1,3 +1,11 @@
+## [1.2.10](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.9...v1.2.10) (2021-09-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-fns to v2.24.0 ([#78](https://github.com/lachiejames/code-review-leaderboard/issues/78)) ([14c2b22](https://github.com/lachiejames/code-review-leaderboard/commit/14c2b220210b9e0caaba6953b622b568739c2d88))
+* **deps:** update dependency gaxios to v4.3.2 ([#74](https://github.com/lachiejames/code-review-leaderboard/issues/74)) ([82b32fb](https://github.com/lachiejames/code-review-leaderboard/commit/82b32fb1f650c2edba6974dcf10bdea9039f20df))
+
 ## [1.2.9](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.8...v1.2.9) (2021-09-12)
 
 

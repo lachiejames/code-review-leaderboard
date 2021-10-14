@@ -1,3 +1,10 @@
+## [1.2.15](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.14...v1.2.15) (2021-10-14)
+
+
+### Bug Fixes
+
+* remove lambda steps from pipeline ([6352c2f](https://github.com/lachiejames/code-review-leaderboard/commit/6352c2fe003d4db4e19d451489eb97ef83e53d70))
+
 ## [1.2.14](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.13...v1.2.14) (2021-10-14)
 
 

@@ -1,3 +1,12 @@
+## [1.2.14](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.13...v1.2.14) (2021-10-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-fns to v2.25.0 ([#88](https://github.com/lachiejames/code-review-leaderboard/issues/88)) ([46706e9](https://github.com/lachiejames/code-review-leaderboard/commit/46706e95d3cb47e893d92122a868c3b20b527aec))
+* **deps:** update dependency prompts to v2.4.2 ([#89](https://github.com/lachiejames/code-review-leaderboard/issues/89)) ([ad3e712](https://github.com/lachiejames/code-review-leaderboard/commit/ad3e7120f74c7d69ca6df7c92b3eaa75fd81d00c))
+* **deps:** update dependency table to v6.7.2 ([#87](https://github.com/lachiejames/code-review-leaderboard/issues/87)) ([8ed716e](https://github.com/lachiejames/code-review-leaderboard/commit/8ed716eed0f36958c02d7e8b079eb55644b3ad38))
+
 ## [1.2.13](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.12...v1.2.13) (2021-09-19)
 
 

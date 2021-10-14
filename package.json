@@ -1,6 +1,6 @@
 {
     "name": "code-review-leaderboard",
-    "version": "1.2.13",
+    "version": "1.2.14",
     "description": "Find out who is doing the most code reviews at your organisation",
     "author": "Lachie James",
     "license": "MIT",

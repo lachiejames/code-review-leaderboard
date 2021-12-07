@@ -23,7 +23,7 @@
         "@types/prompts": "2.0.14",
         "@typescript-eslint/eslint-plugin": "5.0.0",
         "@typescript-eslint/parser": "5.0.0",
-        "eslint": "8.0.1",
+        "eslint": "8.4.1",
         "jest": "27.2.5",
         "jest-mock-console": "1.2.3",
         "nock": "13.1.3",

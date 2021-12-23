@@ -1,3 +1,17 @@
+## [1.2.16](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.15...v1.2.16) (2021-12-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency date-fns to v2.27.0 ([#99](https://github.com/lachiejames/code-review-leaderboard/issues/99)) ([750f824](https://github.com/lachiejames/code-review-leaderboard/commit/750f824548fd1dd22792b4bc687e1ce1527d6ad7))
+* **deps:** update dependency ora to v6 ([#57](https://github.com/lachiejames/code-review-leaderboard/issues/57)) ([1eff1bf](https://github.com/lachiejames/code-review-leaderboard/commit/1eff1bfff9686b22247e0c2b26edb45587a14f3a))
+* **deps:** update dependency table to v6.7.5 ([#98](https://github.com/lachiejames/code-review-leaderboard/issues/98)) ([dd4b21b](https://github.com/lachiejames/code-review-leaderboard/commit/dd4b21bb5c359e89e84b18138413f1118d0fc049))
+
+
+### Reverts
+
+* Revert "fix(deps): update dependency ora to v6 (#57)" (#101) ([fe1a11a](https://github.com/lachiejames/code-review-leaderboard/commit/fe1a11ad78c4cae4b618f60c72b4f12fb957e96a)), closes [#57](https://github.com/lachiejames/code-review-leaderboard/issues/57) [#101](https://github.com/lachiejames/code-review-leaderboard/issues/101)
+
 ## [1.2.15](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.14...v1.2.15) (2021-10-14)
 
 

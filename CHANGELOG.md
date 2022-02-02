@@ -1,3 +1,10 @@
+## [1.2.17](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.16...v1.2.17) (2022-02-02)
+
+
+### Bug Fixes
+
+* remove tsconfig rule that broke build ([9fd29c9](https://github.com/lachiejames/code-review-leaderboard/commit/9fd29c9f057253fdb4cffd226cc3c08fa5b4c2e6))
+
 ## [1.2.16](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.15...v1.2.16) (2021-12-23)
 
 

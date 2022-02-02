@@ -10,7 +10,8 @@
         "outDir": "./lib",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        "strict": true
+        "strict": true,
+        "useUnknownInCatchVariables": false
     },
     "include": ["src/**/*.ts", "code-review-leaderboard.config.js"],
     "exclude": ["src/**/*.spec.ts"]

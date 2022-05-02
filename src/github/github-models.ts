@@ -49,8 +49,11 @@ export interface GithubPullRequest {
 }
 
 export interface GithubPullRequestNote {
-    lastUpdatedDate: string;
-    comments: GithubComment[];
+    user: User;
+
+    state: string;
+
+    submitted_at: string;
 }
 
 export type GithubRepositoryResponse = GithubRepository[];

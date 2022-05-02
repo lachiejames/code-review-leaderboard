@@ -43,7 +43,7 @@ export const getGithubPullRequests = async (): Promise<PullRequest[]> => {
                 repositoryData[repoIndex].name,
                 validPullRequestsData[prIndex].number,
             );
-            const validThreads = threads.filter((pr: GithubPullRequestNote) => inConfigDateRange(pr.lastUpdatedDate));
+            const validThreads = threads.filter((pr: GithubPullRequestNote) => inConfigDateRange(pr.submitted_at));
 
             pullRequests[prIndex].notes = parseGithubPullRequestNoteData(validThreads);
         }

@@ -130,8 +130,10 @@ export const fetchAllGithubPullRequestsForProject = async (projectName: string):
         pullRequestsData = pullRequestsData.concat(lookupResults);
 
         const noMoreResults: boolean = lookupResults.length < MAX_LOOKUP_CALLS;
-        const lastResultInPage: string = lookupResults?.[lookupResults.length - 1].updated_at;
-        const resultsNoLongerInDateRange = !inConfigDateRange(lastResultInPage);
+
+        const lastResultInPage: string | undefined = lookupResults.pop()?.updated_at;
+        const resultsNoLongerInDateRange = !!lastResultInPage && !inConfigDateRange(lastResultInPage);
+
         if (noMoreResults || resultsNoLongerInDateRange) {
             break;
         }

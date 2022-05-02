@@ -1,6 +1,6 @@
 [
     {
-        "number": 1,
+        "number": 3454,
         "state": "closed",
         "user": {
             "login": "John Howard"
@@ -9,12 +9,21 @@
         "merged_at": "2020-07-02T09:57:01Z"
     },
     {
-        "number": 2,
+        "number": 3449,
         "state": "closed",
         "user": {
             "login": "Bob Hawke"
         },
-        "updated_at": "2020-07-02T09:57:09Z",
-        "merged_at": "2020-07-02T09:57:01Z"
+        "updated_at": "2021-05-03T01:08:15Z",
+        "merged_at": "2021-05-03T01:08:15Z"
+    },
+    {
+        "number": 3400,
+        "state": "closed",
+        "user": {
+            "login": "John Howard"
+        },
+        "updated_at": "2021-05-02T13:45:50Z",
+        "merged_at": "2021-05-02T13:45:50Z"
     }
 ]

@@ -28,40 +28,16 @@ const setMockPullRequestThreadResponse = (projectName: string, pullRequestID: nu
 export const setGithubRequestMocks = (): void => {
     setMockRepositoryResponse(mockRepositoryResponse);
 
-    setMockPullRequestResponse(mockRepositoryResponse.value[0].name, mockPullRequestResponse1);
-    setMockPullRequestResponse(mockRepositoryResponse.value[1].name, mockPullRequestResponse2);
+    setMockPullRequestResponse(mockRepositoryResponse[0].name, mockPullRequestResponse1);
+    setMockPullRequestResponse(mockRepositoryResponse[1].name, mockPullRequestResponse2);
 
-    setMockPullRequestThreadResponse(
-        mockRepositoryResponse.value[0].name,
-        mockPullRequestResponse1.value[0].pullRequestId,
-        mockPullRequestThreadResponse1,
-    );
-    setMockPullRequestThreadResponse(
-        mockRepositoryResponse.value[0].name,
-        mockPullRequestResponse1.value[1].pullRequestId,
-        mockPullRequestThreadResponse2,
-    );
-    setMockPullRequestThreadResponse(
-        mockRepositoryResponse.value[0].name,
-        mockPullRequestResponse1.value[2].pullRequestId,
-        mockPullRequestThreadResponse3,
-    );
+    setMockPullRequestThreadResponse(mockRepositoryResponse[0].name, mockPullRequestResponse1[0].number, mockPullRequestThreadResponse1);
+    setMockPullRequestThreadResponse(mockRepositoryResponse[0].name, mockPullRequestResponse1[1].number, mockPullRequestThreadResponse2);
+    setMockPullRequestThreadResponse(mockRepositoryResponse[0].name, mockPullRequestResponse1[2].number, mockPullRequestThreadResponse3);
 
-    setMockPullRequestThreadResponse(
-        mockRepositoryResponse.value[1].name,
-        mockPullRequestResponse2.value[0].pullRequestId,
-        mockPullRequestThreadResponse4,
-    );
-    setMockPullRequestThreadResponse(
-        mockRepositoryResponse.value[1].name,
-        mockPullRequestResponse2.value[1].pullRequestId,
-        mockPullRequestThreadResponse5,
-    );
-    setMockPullRequestThreadResponse(
-        mockRepositoryResponse.value[1].name,
-        mockPullRequestResponse2.value[2].pullRequestId,
-        mockPullRequestThreadResponse6,
-    );
+    setMockPullRequestThreadResponse(mockRepositoryResponse[1].name, mockPullRequestResponse2[0].number, mockPullRequestThreadResponse4);
+    setMockPullRequestThreadResponse(mockRepositoryResponse[1].name, mockPullRequestResponse2[1].number, mockPullRequestThreadResponse5);
+    setMockPullRequestThreadResponse(mockRepositoryResponse[1].name, mockPullRequestResponse2[2].number, mockPullRequestThreadResponse6);
 };
 
 export const setGithubRepositoryTimeoutResponse = (): void => {

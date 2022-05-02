@@ -2,6 +2,7 @@ import MockConsole from "jest-mock-console";
 
 import { setAzureRequestMocks } from "../../test-utils/azure/azure-request-mocks";
 import { MOCK_PULL_REQUESTS_AZURE } from "../../test-utils/azure/mock-pull-requests";
+import { setGithubRequestMocks } from "../../test-utils/github/github-request-mocks";
 import { setGitlabRequestMocks } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { MOCK_PULL_REQUESTS_GITLAB } from "../../test-utils/gitlab/mock-pull-requests";
 import { MOCK_PULL_REQUESTS_ALL } from "../../test-utils/shared/mock-pull-requests";
@@ -19,6 +20,7 @@ describe("leaderboard", () => {
     describe("getAllPullRequestData()", () => {
         beforeEach(() => {
             setGitlabRequestMocks();
+            setGithubRequestMocks();
             setAzureRequestMocks();
         });
 

@@ -2,7 +2,7 @@ import { NoteType } from "../../src/shared/note-type.enum";
 import { PullRequestNote } from "../../src/shared/pull-request-note.model";
 import { PullRequest } from "../../src/shared/pull-request.model";
 
-export const MOCK_PULL_REQUESTS_AZURE: PullRequest[] = [
+export const MOCK_PULL_REQUESTS_GITHUB: PullRequest[] = [
     new PullRequest("John Howard", [
         new PullRequestNote("Bob Hawke", NoteType.Comment),
         new PullRequestNote("John Howard", NoteType.Comment),

@@ -14,13 +14,13 @@ describe("github data parser", () => {
 
     describe("parseGithubPullRequestData()", () => {
         it("parsed data expected number of data entries", () => {
-            const pullRequests: PullRequest[] = parseGithubPullRequestData(mockResponse.value);
+            const pullRequests: PullRequest[] = parseGithubPullRequestData(mockResponse);
 
             expect(pullRequests.length).toBe(3);
         });
 
         it("parsed data contains expected content", () => {
-            const pullRequests: PullRequest[] = parseGithubPullRequestData(mockResponse.value);
+            const pullRequests: PullRequest[] = parseGithubPullRequestData(mockResponse);
 
             expect(pullRequests).toEqual([
                 { authorName: "John Howard", notes: [] },
@@ -32,13 +32,13 @@ describe("github data parser", () => {
 
     describe("parseGithubPullRequestNoteData()", () => {
         it("parsed data expected number of data entries", () => {
-            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse.value);
+            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse);
 
             expect(pullRequestNotes.length).toBe(3);
         });
 
         it("parsed data contains expected content", () => {
-            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse.value);
+            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse);
 
             expect(pullRequestNotes).toEqual([
                 {
@@ -57,14 +57,14 @@ describe("github data parser", () => {
         });
 
         it("parsed data contains expected number of approvals", () => {
-            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse.value);
+            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse);
 
             const numApprovals: number = pullRequestNotes.filter((note: PullRequestNote) => note.noteType === NoteType.Approval).length;
             expect(numApprovals).toEqual(2);
         });
 
         it("parsed data contains expected number of comments", () => {
-            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse.value);
+            const pullRequestNotes: PullRequestNote[] = parseGithubPullRequestNoteData(mockThreadsResponse);
 
             const numComments: number = pullRequestNotes.filter((note: PullRequestNote) => note.noteType === NoteType.Comment).length;
             expect(numComments).toEqual(1);

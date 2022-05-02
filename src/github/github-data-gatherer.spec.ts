@@ -44,7 +44,9 @@ describe("github data gatherer", () => {
                 overrideConfig({ httpTimeoutInMS: 1 });
                 setGithubRepositoryTimeoutResponse();
 
-                await expect(fetchGithubRepositoryData()).rejects.toThrowError("network timeout at: https://api.github.com/orgs/MyOrg/repos");
+                await expect(fetchGithubRepositoryData()).rejects.toThrowError(
+                    "network timeout at: https://api.github.com/orgs/MyOrg/repos",
+                );
             });
 
             it("throws expected error when 203 response is returned", async () => {

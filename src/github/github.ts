@@ -4,7 +4,7 @@ import { getConfig } from "../config";
 import { PullRequest } from "../shared/pull-request.model";
 import { logNoteCount } from "../shared/shared-logger";
 
-import { fetchGithubPullRequestsByProject, fetchGithubRepositoryData, fetchPullRequestNotes } from "./github-data-gatherer";
+import { fetchAllGithubPullRequestsForProject, fetchGithubRepositoryData, fetchPullRequestNotes } from "./github-data-gatherer";
 import { parseGithubPullRequestData, parseGithubPullRequestNoteData } from "./github-data-parser";
 import {
     logPullRequestFetchingProgress,
@@ -30,7 +30,7 @@ export const getGithubPullRequests = async (): Promise<PullRequest[]> => {
     logRepositoryFetchingCompletion(repositoryData.length);
 
     for (let repoIndex = 0; repoIndex < repositoryData.length; repoIndex++) {
-        const pullRequestsData: GithubPullRequest[] = await fetchGithubPullRequestsByProject(repositoryData[repoIndex].name);
+        const pullRequestsData: GithubPullRequest[] = await fetchAllGithubPullRequestsForProject(repositoryData[repoIndex].name);
         const validPullRequestsData = pullRequestsData.filter((pr: GithubPullRequest) => inConfigDateRange(pr.updated_at));
         const pullRequests: PullRequest[] = parseGithubPullRequestData(validPullRequestsData);
 

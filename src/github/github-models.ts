@@ -12,6 +12,8 @@ export interface GithubHttpParams {
     per_page: number;
 
     sort: string;
+
+    direction: string;
 }
 
 interface User {

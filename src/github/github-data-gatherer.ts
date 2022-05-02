@@ -1,3 +1,4 @@
+import { isWithinInterval } from "date-fns";
 import { GaxiosError, GaxiosResponse, request } from "gaxios";
 
 import { getConfig } from "../config";
@@ -14,6 +15,7 @@ import {
 } from "./github-models";
 
 const BASE_URL = "https://api.github.com";
+const MAX_LOOKUP_CALLS = 100;
 const MAX_RESULTS_PER_PAGE = 100;
 
 const getBase64PAT = (): string => {
@@ -60,6 +62,7 @@ export const getGithubHttpParams = (pageNumber?: number): GithubHttpParams => {
         per_page: MAX_RESULTS_PER_PAGE,
         page: pageNumber ?? 1,
         sort: "updated",
+        direction: "desc",
     };
 };
 
@@ -91,14 +94,14 @@ export const fetchPullRequestNotes = async (projectName: string, pullRequestID: 
     return pullRequestLookupResponse?.data ?? [];
 };
 
-export const fetchGithubPullRequestsByProject = async (projectName: string): Promise<GithubPullRequest[]> => {
+const fetchGithubPullRequestsByProject = async (projectName: string, pageNumber: number): Promise<GithubPullRequest[]> => {
     let pullRequestLookupResponse: GaxiosResponse<GithubPullRequestResponse> | undefined;
 
     await request<GithubPullRequestResponse>({
         baseUrl: BASE_URL,
         url: `/repos/${getGithubOrg()}/${projectName}/pulls`,
         method: "GET",
-        params: getGithubHttpParams(),
+        params: getGithubHttpParams(pageNumber),
         headers: getGithubHttpHeaders(),
         timeout: getConfig().httpTimeoutInMS,
         retry: true,
@@ -110,6 +113,31 @@ export const fetchGithubPullRequestsByProject = async (projectName: string): Pro
         .catch((response: GaxiosError<GithubPullRequestResponse>) => handleErrorResponse(response));
 
     return pullRequestLookupResponse?.data ?? [];
+};
+
+const inConfigDateRange = (prDateString: string): boolean => {
+    const prDate = new Date(prDateString);
+    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
+
+    return isWithinInterval(prDate, allowedDateRange);
+};
+
+export const fetchAllGithubPullRequestsForProject = async (projectName: string): Promise<GithubPullRequest[]> => {
+    let pullRequestsData: GithubPullRequest[] = [];
+
+    for (let pageNumber = 1; pageNumber <= MAX_LOOKUP_CALLS; pageNumber++) {
+        const lookupResults: GithubPullRequest[] = await fetchGithubPullRequestsByProject(projectName, pageNumber);
+        pullRequestsData = pullRequestsData.concat(lookupResults);
+
+        const noMoreResults: boolean = lookupResults.length < MAX_LOOKUP_CALLS;
+        const lastResultInPage: string = lookupResults?.[lookupResults.length - 1].updated_at;
+        const resultsNoLongerInDateRange = !inConfigDateRange(lastResultInPage);
+        if (noMoreResults || resultsNoLongerInDateRange) {
+            break;
+        }
+    }
+
+    return pullRequestsData;
 };
 
 export const fetchGithubRepositoryData = async (): Promise<GithubRepository[]> => {

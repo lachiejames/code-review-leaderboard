@@ -9,6 +9,11 @@ export const setMockConfig = (): void => {
             baseUrl: "https://dev.azure.com/MyOrg",
             personalAccessToken: "abc123",
         },
+        github: {
+            enabled: true,
+            baseUrl: "https://github.com/MyOrg",
+            personalAccessToken: "abc123",
+        },
         gitlab: {
             enabled: true,
             baseUrl: "https://gitlab.example.com/",

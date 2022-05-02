@@ -22,7 +22,7 @@ const setMockPullRequestResponse = (projectName: string, response: GithubPullReq
 };
 
 const setMockPullRequestThreadResponse = (projectName: string, pullRequestID: number, response: GithubPullRequestNoteResponse) => {
-    nock("https://api.github.com/").get(`/repos/MyOrg/${projectName}/pulls/${pullRequestID}/comments`).reply(200, response);
+    nock("https://api.github.com/").get(`/repos/MyOrg/${projectName}/pulls/${pullRequestID}/reviews`).reply(200, response);
 };
 
 export const setGithubRequestMocks = (): void => {
@@ -83,7 +83,7 @@ export const setGithubPullRequestTimeoutResponse = (projectName: string): void =
 
 export const setGithubPullRequestThreadsTimeoutResponse = (projectName: string, pullRequestID: number): void => {
     nock("https://api.github.com/")
-        .get(`/repos/MyOrg/${projectName}/pulls/${pullRequestID}/comments`)
+        .get(`/repos/MyOrg/${projectName}/pulls/${pullRequestID}/reviews`)
         .times(4)
         .delayConnection(10)
         .reply(200, []);

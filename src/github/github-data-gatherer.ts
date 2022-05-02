@@ -78,7 +78,7 @@ export const fetchPullRequestNotes = async (projectName: string, pullRequestID: 
 
     await request<GithubPullRequestNoteResponse>({
         baseUrl: BASE_URL,
-        url: `/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`,
+        url: `/repos/${getGithubOrg()}/${projectName}/pulls/${pullRequestID}/reviews`,
         method: "GET",
         headers: getGithubHttpHeaders(),
         timeout: getConfig().httpTimeoutInMS,

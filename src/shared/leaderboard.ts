@@ -1,5 +1,6 @@
 import { getAzurePullRequests } from "../azure/azure";
 import { getConfig } from "../config";
+import { getGithubPullRequests } from "../github/github";
 import { getGitlabPullRequests } from "../gitlab/gitlab";
 import { calculateResults, createResultsTable, logResults, sortResults } from "../shared/result-calculator";
 import { Result } from "../shared/result.model";
@@ -14,6 +15,11 @@ export const getAllPullRequestData = async (): Promise<PullRequest[]> => {
     if (getConfig().gitlab.enabled) {
         const gitlabPullRequests: PullRequest[] = await getGitlabPullRequests();
         pullRequests = pullRequests.concat(gitlabPullRequests);
+    }
+
+    if (getConfig().github.enabled) {
+        const githubPullRequests: PullRequest[] = await getGithubPullRequests();
+        pullRequests = pullRequests.concat(githubPullRequests);
     }
 
     if (getConfig().azure.enabled) {

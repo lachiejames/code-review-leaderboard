@@ -34,16 +34,12 @@ const validateSuccessResponse = (response: GaxiosResponse): void => {
 };
 
 const handleErrorResponse = (response: GaxiosError): void => {
-    // Re-throw the error from validateSuccessResponse()
-    // Necessary because 203 responses indicate an error, but are not interpreted as an error by Gaxios
-    if (response.response === undefined) {
-        throw response;
-    }
+    if (response.response === undefined) throw response
 
     const baseErrorMessage = `Github responded with ${response.response.status} - ${response.response.statusText}`;
 
-    if (response.response.status === 401) {
-        throw Error(`${baseErrorMessage}, which likely means that you do not have permission to access ${getConfig().github.baseUrl}`);
+    if (response.response.status === 403) {
+        throw Error(`${baseErrorMessage}, which likely means that your personal access token is invalid`);
     } else if (response.response.status === 404) {
         throw Error(`${baseErrorMessage}, which likely means that your baseUrl (${getConfig().github.baseUrl}) is invalid`);
     } else {

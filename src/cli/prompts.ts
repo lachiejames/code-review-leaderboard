@@ -161,7 +161,7 @@ export const getConfigFromCli = async (): Promise<Config> => {
 
     if (config.github.enabled) {
         config.github.baseUrl = await getGithubBaseUrl();
-        config.azure.personalAccessToken = await getGithubAccessToken();
+        config.github.personalAccessToken = await getGithubAccessToken();
     }
 
     if (config.gitlab.enabled) {

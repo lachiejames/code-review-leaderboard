@@ -13,6 +13,8 @@ export interface Config {
 
     azure: Platform;
 
+    github: Platform;
+
     gitlab: Platform;
 
     httpTimeoutInMS: number;

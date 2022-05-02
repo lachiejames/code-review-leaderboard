@@ -106,6 +106,11 @@ const getEmptyConfig = (): Config => {
             baseUrl: "",
             personalAccessToken: "",
         },
+        github: {
+            enabled: false,
+            baseUrl: "",
+            personalAccessToken: "",
+        },
         gitlab: {
             enabled: false,
             baseUrl: "",

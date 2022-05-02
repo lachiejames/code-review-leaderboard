@@ -13,6 +13,8 @@ import {
     GithubRepositoryResponse,
 } from "./github-models";
 
+const BASE_URL = "https://api.github.com";
+
 const getBase64PAT = (): string => {
     const token = `:${getConfig().github.personalAccessToken}`;
     const tokenBase64: string = Buffer.from(token).toString("base64");
@@ -63,11 +65,19 @@ export const getGithubHttpParams = (): GithubHttpParams => {
     };
 };
 
+export const getGithubOrg = (): string => {
+    const baseUrl: string = getConfig().github.baseUrl;
+    const baseUrlArray: string[] = baseUrl.split("/");
+    const lastUrlParam: string | undefined = baseUrlArray.pop();
+
+    return lastUrlParam ?? "";
+};
+
 export const fetchPullRequestNotes = async (projectName: string, pullRequestID: number): Promise<GithubPullRequestNote[]> => {
     let pullRequestLookupResponse: GaxiosResponse<GithubPullRequestNoteResponse> | undefined;
 
     await request<GithubPullRequestNoteResponse>({
-        baseUrl: getConfig().github.baseUrl,
+        baseUrl: BASE_URL,
         url: `/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`,
         method: "GET",
         headers: getGithubHttpHeaders(),
@@ -87,8 +97,8 @@ export const fetchGithubPullRequestsByProject = async (projectName: string): Pro
     let pullRequestLookupResponse: GaxiosResponse<GithubPullRequestResponse> | undefined;
 
     await request<GithubPullRequestResponse>({
-        baseUrl: getConfig().github.baseUrl,
-        url: `/${projectName}/_apis/git/pullrequests`,
+        baseUrl: BASE_URL,
+        url: `/repos/${getGithubOrg()}/${projectName}/pulls`,
         method: "GET",
         params: getGithubHttpParams(),
         headers: getGithubHttpHeaders(),
@@ -108,8 +118,8 @@ export const fetchGithubRepositoryData = async (): Promise<GithubRepository[]> =
     let repositoryLookupResponse: GaxiosResponse<GithubRepositoryResponse> | undefined;
 
     await request<GithubRepositoryResponse>({
-        baseUrl: getConfig().github.baseUrl,
-        url: `/_apis/git/repositories`,
+        baseUrl: BASE_URL,
+        url: `/orgs/${getGithubOrg()}/repos`,
         method: "GET",
         headers: getGithubHttpHeaders(),
         timeout: getConfig().httpTimeoutInMS,

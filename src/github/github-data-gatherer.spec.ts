@@ -44,7 +44,7 @@ describe("github data gatherer", () => {
                 overrideConfig({ httpTimeoutInMS: 1 });
                 setGithubRepositoryTimeoutResponse();
 
-                await expect(fetchGithubRepositoryData()).rejects.toThrowError("network timeout at: https://github.com/orgs/MyOrg/repos");
+                await expect(fetchGithubRepositoryData()).rejects.toThrowError("network timeout at: https://api.github.com/orgs/MyOrg/repos");
             });
 
             it("throws expected error when 203 response is returned", async () => {
@@ -65,7 +65,7 @@ describe("github data gatherer", () => {
                 setGithubRepositoryErrorResponse(401);
 
                 await expect(fetchGithubRepositoryData()).rejects.toThrowError(
-                    "Github responded with 401 - Unauthorized, which likely means that you do not have permission to access https://github.com/orgs/MyOrg/repos", //broken
+                    "Github responded with 401 - Unauthorized, which likely means that you do not have permission to access https://github.com/MyOrg",
                 );
             });
 
@@ -73,7 +73,7 @@ describe("github data gatherer", () => {
                 setGithubRepositoryErrorResponse(404);
 
                 await expect(fetchGithubRepositoryData()).rejects.toThrowError(
-                    "Github responded with 404 - Not Found, which likely means that your baseUrl (https://github.com/orgs/MyOrg/repos) is invalid",
+                    "Github responded with 404 - Not Found, which likely means that your baseUrl (https://github.com/MyOrg) is invalid",
                 );
             });
 

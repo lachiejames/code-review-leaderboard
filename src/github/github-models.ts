@@ -1,41 +1,60 @@
 export interface GithubHttpHeaders {
-    "PRIVATE-TOKEN": string;
+    Authorization: string;
 }
 
 export interface GithubHttpParams {
     [key: string]: string | number;
 
-    scope: string;
-    state: string;
-    order_by: string;
-    updated_before: string;
-    updated_after: string;
-    per_page: number;
-    page: number;
+    "api-version": number;
+    "$top": number;
+    "searchCriteria.status": string;
 }
 
-export interface GithubPullRequestData {
-    iid: number;
-
-    project_id: number;
-
-    updated_at: string;
-
-    user_notes_count: number;
-
-    author: GithubUserData;
+interface Project {
+    lastUpdateTime: string;
 }
 
-export interface GithubPullRequestNoteData {
-    body: string;
-
-    author: GithubUserData;
-
-    updated_at: string;
-
-    resolvable: boolean;
+interface User {
+    displayName: string;
 }
 
-export interface GithubUserData {
+export interface GithubComment {
+    author: User;
+
+    content: string;
+
+    lastUpdatedDate: string;
+
+    commentType: string;
+}
+
+export interface GithubRepository {
     name: string;
+
+    project: Project;
+}
+
+export interface GithubPullRequest {
+    pullRequestId: number;
+
+    createdBy: User;
+
+    creationDate: string;
+}
+
+export interface GithubPullRequestNote {
+    lastUpdatedDate: string;
+    comments: GithubComment[];
+}
+
+export interface GithubRepositoryResponse {
+    value: GithubRepository[];
+}
+
+export interface GithubPullRequestResponse {
+    value: GithubPullRequest[];
+}
+
+export interface GithubPullRequestNoteResponse {
+    value: GithubPullRequestNote[];
 }

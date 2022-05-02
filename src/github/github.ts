@@ -1,30 +1,57 @@
+import { isWithinInterval } from "date-fns";
+
+import { getConfig } from "../config";
 import { PullRequest } from "../shared/pull-request.model";
 import { logNoteCount } from "../shared/shared-logger";
 
-import { fetchAllGithubPullRequestData, fetchGithubPullRequestNoteData } from "./github-data-gatherer";
+import { fetchGithubPullRequestsByProject, fetchGithubRepositoryData, fetchPullRequestNotes } from "./github-data-gatherer";
 import { parseGithubPullRequestData, parseGithubPullRequestNoteData } from "./github-data-parser";
-import { logPullRequestFetchingCompletion, logPullRequestFetchingProgress, logPullRequestFetchingStart } from "./github-logger";
-import { GithubPullRequestData, GithubPullRequestNoteData } from "./github-models";
+import {
+    logPullRequestFetchingProgress,
+    logPullRequestNoteFetchingProgress,
+    logRepositoryFetchingCompletion,
+    logRepositoryFetchingStart,
+} from "./github-logger";
+import { GithubPullRequest, GithubPullRequestNote, GithubRepository } from "./github-models";
+
+const inConfigDateRange = (prDateString: string): boolean => {
+    const prDate = new Date(prDateString);
+    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
+
+    return isWithinInterval(prDate, allowedDateRange);
+};
 
 export const getGithubPullRequests = async (): Promise<PullRequest[]> => {
-    logPullRequestFetchingStart();
+    logRepositoryFetchingStart();
 
-    const pullRequestsData: GithubPullRequestData[] = await fetchAllGithubPullRequestData();
-    const pullRequests: PullRequest[] = parseGithubPullRequestData(pullRequestsData);
+    const repositoryData: GithubRepository[] = await fetchGithubRepositoryData();
+    let allPullRequests: PullRequest[] = [];
 
-    logPullRequestFetchingCompletion(pullRequestsData.length);
+    logRepositoryFetchingCompletion(repositoryData.length);
 
-    for (let prIndex = 0; prIndex < pullRequests.length; prIndex++) {
-        logPullRequestFetchingProgress(prIndex, pullRequests.length);
-        const noteData: GithubPullRequestNoteData[] = await fetchGithubPullRequestNoteData(
-            pullRequestsData[prIndex].project_id,
-            pullRequestsData[prIndex].iid,
-        );
+    for (let repoIndex = 0; repoIndex < repositoryData.length; repoIndex++) {
+        const pullRequestsData: GithubPullRequest[] = await fetchGithubPullRequestsByProject(repositoryData[repoIndex].name);
+        const validPullRequestsData = pullRequestsData.filter((pr: GithubPullRequest) => inConfigDateRange(pr.creationDate));
+        const pullRequests: PullRequest[] = parseGithubPullRequestData(validPullRequestsData);
 
-        pullRequests[prIndex].notes = parseGithubPullRequestNoteData(noteData);
+        logPullRequestFetchingProgress(repoIndex, repositoryData.length, pullRequests.length);
+
+        for (let prIndex = 0; prIndex < pullRequests.length; prIndex++) {
+            logPullRequestNoteFetchingProgress(repoIndex, repositoryData.length, prIndex, pullRequests.length);
+
+            const threads: GithubPullRequestNote[] = await fetchPullRequestNotes(
+                repositoryData[repoIndex].name,
+                validPullRequestsData[prIndex].pullRequestId,
+            );
+            const validThreads = threads.filter((pr: GithubPullRequestNote) => inConfigDateRange(pr.lastUpdatedDate));
+
+            pullRequests[prIndex].notes = parseGithubPullRequestNoteData(validThreads);
+        }
+
+        allPullRequests = allPullRequests.concat(pullRequests);
     }
 
-    logNoteCount(pullRequests);
+    logNoteCount(allPullRequests);
 
-    return pullRequests;
+    return allPullRequests;
 };

@@ -1,61 +1,92 @@
 import nock from "nock";
 
 import { getGithubHttpParams } from "../../src/github/github-data-gatherer";
-import { GithubPullRequestNoteData } from "../../src/github/github-models";
+import { GithubPullRequestNoteResponse, GithubPullRequestResponse, GithubRepositoryResponse } from "../../src/github/github-models";
 
-import fullPageMockResponse from "./mock-data/mock-github-pull-request-lookup-full-page-response.json";
-import mockPullRequestsResponse from "./mock-data/mock-github-pull-request-lookup-response.json";
-import mockPullRequestNotesResponse1 from "./mock-data/mock-github-pull-request-notes-lookup-response-1.json";
-import mockPullRequestNotesResponse2 from "./mock-data/mock-github-pull-request-notes-lookup-response-2.json";
-import mockPullRequestNotesResponse3 from "./mock-data/mock-github-pull-request-notes-lookup-response-3.json";
-import mockPullRequestNotesResponse4 from "./mock-data/mock-github-pull-request-notes-lookup-response-4.json";
-import mockPullRequestNotesResponse5 from "./mock-data/mock-github-pull-request-notes-lookup-response-5.json";
+import mockPullRequestResponse1 from "./mock-data/mock-pull-request-lookup-response-1.json";
+import mockPullRequestResponse2 from "./mock-data/mock-pull-request-lookup-response-2.json";
+import mockPullRequestThreadResponse1 from "./mock-data/mock-pull-request-threads-lookup-response-1.json";
+import mockPullRequestThreadResponse2 from "./mock-data/mock-pull-request-threads-lookup-response-2.json";
+import mockPullRequestThreadResponse3 from "./mock-data/mock-pull-request-threads-lookup-response-3.json";
+import mockPullRequestThreadResponse4 from "./mock-data/mock-pull-request-threads-lookup-response-4.json";
+import mockPullRequestThreadResponse5 from "./mock-data/mock-pull-request-threads-lookup-response-5.json";
+import mockPullRequestThreadResponse6 from "./mock-data/mock-pull-request-threads-lookup-response-6.json";
+import mockRepositoryResponse from "./mock-data/mock-repository-lookup-response.json";
 
-const setMockPullRequestResponse = () => {
-    nock("https://github.example.com/").get("/api/v4/merge_requests").query(getGithubHttpParams()).reply(200, mockPullRequestsResponse);
+const setMockRepositoryResponse = (response: GithubRepositoryResponse) => {
+    nock("https://dev.github.com/MyOrg/").get("/_apis/git/repositories").reply(200, response);
 };
 
-const setMockPullRequestNoteResponse = (projectID: number, pullRequestID: number, response: GithubPullRequestNoteData[]) => {
-    nock("https://github.example.com/").get(`/api/v4/projects/${projectID}/merge_requests/${pullRequestID}/notes`).reply(200, response);
+const setMockPullRequestResponse = (projectName: string, response: GithubPullRequestResponse) => {
+    nock("https://dev.github.com/MyOrg/").get(`/${projectName}/_apis/git/pullrequests`).query(getGithubHttpParams()).reply(200, response);
+};
+
+const setMockPullRequestThreadResponse = (projectName: string, pullRequestID: number, response: GithubPullRequestNoteResponse) => {
+    nock("https://dev.github.com/MyOrg/")
+        .get(`/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`)
+        .reply(200, response);
 };
 
 export const setGithubRequestMocks = (): void => {
-    setMockPullRequestResponse();
-    setMockPullRequestNoteResponse(56, 2102, mockPullRequestNotesResponse1);
-    setMockPullRequestNoteResponse(68, 137, mockPullRequestNotesResponse2);
-    setMockPullRequestNoteResponse(195, 463, mockPullRequestNotesResponse3);
-    setMockPullRequestNoteResponse(249, 88, mockPullRequestNotesResponse4);
-    setMockPullRequestNoteResponse(73, 169, mockPullRequestNotesResponse5);
+    setMockRepositoryResponse(mockRepositoryResponse);
+
+    setMockPullRequestResponse(mockRepositoryResponse.value[0].name, mockPullRequestResponse1);
+    setMockPullRequestResponse(mockRepositoryResponse.value[1].name, mockPullRequestResponse2);
+
+    setMockPullRequestThreadResponse(
+        mockRepositoryResponse.value[0].name,
+        mockPullRequestResponse1.value[0].pullRequestId,
+        mockPullRequestThreadResponse1,
+    );
+    setMockPullRequestThreadResponse(
+        mockRepositoryResponse.value[0].name,
+        mockPullRequestResponse1.value[1].pullRequestId,
+        mockPullRequestThreadResponse2,
+    );
+    setMockPullRequestThreadResponse(
+        mockRepositoryResponse.value[0].name,
+        mockPullRequestResponse1.value[2].pullRequestId,
+        mockPullRequestThreadResponse3,
+    );
+
+    setMockPullRequestThreadResponse(
+        mockRepositoryResponse.value[1].name,
+        mockPullRequestResponse2.value[0].pullRequestId,
+        mockPullRequestThreadResponse4,
+    );
+    setMockPullRequestThreadResponse(
+        mockRepositoryResponse.value[1].name,
+        mockPullRequestResponse2.value[1].pullRequestId,
+        mockPullRequestThreadResponse5,
+    );
+    setMockPullRequestThreadResponse(
+        mockRepositoryResponse.value[1].name,
+        mockPullRequestResponse2.value[2].pullRequestId,
+        mockPullRequestThreadResponse6,
+    );
 };
 
-export const setGithubFullPageMockResponse = (pageNumber: number): void => {
-    nock("https://github.example.com/")
-        .get("/api/v4/merge_requests")
-        .query(getGithubHttpParams(pageNumber))
-        .reply(200, fullPageMockResponse);
+export const setGithubRepositoryTimeoutResponse = (): void => {
+    nock("https://dev.github.com/MyOrg/").get("/_apis/git/repositories").times(4).delayConnection(10).reply(200, []);
 };
 
-export const setGithubPullRequestTimeoutResponse = (): void => {
-    nock("https://github.example.com/")
-        .get("/api/v4/merge_requests")
+export const setGithubRepositoryErrorResponse = (responseCode: number): void => {
+    nock("https://dev.github.com/MyOrg/").get("/_apis/git/repositories").times(4).reply(responseCode, []);
+};
+
+export const setGithubPullRequestTimeoutResponse = (projectName: string): void => {
+    nock("https://dev.github.com/MyOrg/")
+        .get(`/${projectName}/_apis/git/pullrequests`)
         .query(getGithubHttpParams())
         .times(4)
         .delayConnection(10)
-        .reply(200, {});
+        .reply(200, []);
 };
 
-export const setGithubPullRequestErrorResponse = (responseCode: number): void => {
-    nock("https://github.example.com/").get("/api/v4/merge_requests").query(getGithubHttpParams()).times(4).reply(responseCode, {});
-};
-
-export const setGithubPullRequestTextErrorResponse = (text: string): void => {
-    nock("https://github.example.com/").get("/api/v4/merge_requests").query(getGithubHttpParams()).times(4).replyWithError({ code: text });
-};
-
-export const setGithubPullRequestNotesTimeoutResponse = (projectID: number, pullRequestID: number): void => {
-    nock("https://github.example.com/")
-        .get(`/api/v4/projects/${projectID}/merge_requests/${pullRequestID}/notes`)
+export const setGithubPullRequestThreadsTimeoutResponse = (projectName: string, pullRequestID: number): void => {
+    nock("https://dev.github.com/MyOrg/")
+        .get(`/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`)
         .times(4)
         .delayConnection(10)
-        .reply(200, {});
+        .reply(200, []);
 };

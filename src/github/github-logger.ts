@@ -1,22 +1,32 @@
 import { terminalSpinner } from "../shared/shared-logger";
 
-export const logPullRequestFetchingStart = (): void => {
-    terminalSpinner.start("Fetching GitLab pull requests...");
+export const logRepositoryFetchingStart = (): void => {
+    terminalSpinner.start("Fetching Github repositories...");
 };
 
-export const logPullRequestFetchingProgress = (prIndex: number, numPRs: number): void => {
-    if (prIndex === 0) {
+export const logPullRequestFetchingProgress = (repoIndex: number, numRepos: number, numPRs: number): void => {
+    if (repoIndex === 0) {
         terminalSpinner.start("");
     }
 
-    terminalSpinner.text = `Fetching comments and approvals for each pull request... ${prIndex + 1}/${numPRs}`;
+    terminalSpinner.text = `Fetching pull requests for each repository... ${repoIndex + 1}/${numRepos}`;
 
-    if (prIndex + 1 === numPRs) {
+    if (repoIndex + 1 === numRepos && numPRs === 0) {
         terminalSpinner.stopAndPersist();
     }
 };
 
-export const logPullRequestFetchingCompletion = (numPullRequests: number): void => {
+export const logPullRequestNoteFetchingProgress = (repoIndex: number, numRepos: number, prIndex: number, numPRs: number): void => {
+    const repoText = `Fetching pull requests for each repository... ${repoIndex + 1}/${numRepos}`;
+    const prText = `Fetching comments and approvals for pull request ${prIndex + 1}/${numPRs}...`;
+    terminalSpinner.text = `${repoText}\n  ${prText}`;
+
+    if (repoIndex + 1 === numRepos && prIndex + 1 === numPRs) {
+        terminalSpinner.stopAndPersist();
+    }
+};
+
+export const logRepositoryFetchingCompletion = (numRepos: number): void => {
     terminalSpinner.stopAndPersist();
-    terminalSpinner.succeed(`Found ${numPullRequests} pull requests!`);
+    terminalSpinner.succeed(`Found ${numRepos} repositories!`);
 };

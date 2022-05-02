@@ -1,9 +1,9 @@
 module.exports = {
     // Only allow merge requests created/updated after this date
-    startDate: new Date("2021-05-01"),
+    startDate: new Date("2022-04-18"),
 
     // Only allow merge requests created/updated before this date
-    endDate: new Date("2021-05-07"),
+    endDate: new Date("2022-05-01"),
 
     // Azure-specific options
     azure: {
@@ -11,6 +11,18 @@ module.exports = {
         enabled: true,
 
         // The home page for your organisation's gitlab
+        baseUrl: "",
+
+        // Authenticates http requests during lookups
+        personalAccessToken: "",
+    },
+
+    // Github-specific options
+    github: {
+        // Controls whether Github pull requests are included in the leaderboard
+        enabled: true,
+
+        // The home page for your organisation's Github
         baseUrl: "",
 
         // Authenticates http requests during lookups

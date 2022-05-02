@@ -14,17 +14,15 @@ import mockPullRequestThreadResponse6 from "./mock-data/mock-pull-request-thread
 import mockRepositoryResponse from "./mock-data/mock-repository-lookup-response.json";
 
 const setMockRepositoryResponse = (response: GithubRepositoryResponse) => {
-    nock("https://dev.github.com/MyOrg/").get("/_apis/git/repositories").reply(200, response);
+    nock("https://github.com/").get("/orgs/MyOrg/repos").reply(200, response);
 };
 
 const setMockPullRequestResponse = (projectName: string, response: GithubPullRequestResponse) => {
-    nock("https://dev.github.com/MyOrg/").get(`/${projectName}/_apis/git/pullrequests`).query(getGithubHttpParams()).reply(200, response);
+    nock("https://github.com/").get(`/repos/MyOrg/${projectName}/pulls`).query(getGithubHttpParams()).reply(200, response);
 };
 
 const setMockPullRequestThreadResponse = (projectName: string, pullRequestID: number, response: GithubPullRequestNoteResponse) => {
-    nock("https://dev.github.com/MyOrg/")
-        .get(`/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`)
-        .reply(200, response);
+    nock("https://github.com/").get(`/repos/MyOrg/${projectName}/pulls/${pullRequestID}/comments`).reply(200, response);
 };
 
 export const setGithubRequestMocks = (): void => {
@@ -67,16 +65,16 @@ export const setGithubRequestMocks = (): void => {
 };
 
 export const setGithubRepositoryTimeoutResponse = (): void => {
-    nock("https://dev.github.com/MyOrg/").get("/_apis/git/repositories").times(4).delayConnection(10).reply(200, []);
+    nock("https://github.com/").get("/orgs/MyOrg/repos").times(4).delayConnection(10).reply(200, []);
 };
 
 export const setGithubRepositoryErrorResponse = (responseCode: number): void => {
-    nock("https://dev.github.com/MyOrg/").get("/_apis/git/repositories").times(4).reply(responseCode, []);
+    nock("https://github.com/").get("/orgs/MyOrg/repos").times(4).reply(responseCode, []);
 };
 
 export const setGithubPullRequestTimeoutResponse = (projectName: string): void => {
-    nock("https://dev.github.com/MyOrg/")
-        .get(`/${projectName}/_apis/git/pullrequests`)
+    nock("https://github.com/")
+        .get(`/repos/MyOrg/${projectName}/pulls`)
         .query(getGithubHttpParams())
         .times(4)
         .delayConnection(10)
@@ -84,8 +82,8 @@ export const setGithubPullRequestTimeoutResponse = (projectName: string): void =
 };
 
 export const setGithubPullRequestThreadsTimeoutResponse = (projectName: string, pullRequestID: number): void => {
-    nock("https://dev.github.com/MyOrg/")
-        .get(`/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`)
+    nock("https://github.com/")
+        .get(`/repos/MyOrg/${projectName}/pulls/${pullRequestID}/comments`)
         .times(4)
         .delayConnection(10)
         .reply(200, []);

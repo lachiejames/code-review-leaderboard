@@ -12,6 +12,16 @@ const verifyAzureConfig = (): void => {
     }
 };
 
+const verifyGithubConfig = (): void => {
+    if (getConfig().github.personalAccessToken === "") {
+        throw Error(`Github pull requests are enabled, but you have not set a personal access token`);
+    }
+
+    if (getConfig().github.baseUrl === "") {
+        throw Error(`Github pull requests are enabled, but you have not set a base URL`);
+    }
+};
+
 const verifyGitlabConfig = (): void => {
     if (getConfig().gitlab.personalAccessToken === "") {
         throw Error(`Gitlab pull requests are enabled, but you have not set a personal access token`);
@@ -35,6 +45,10 @@ export const verifyConfig = (): void => {
 
     if (getConfig().azure.enabled) {
         verifyAzureConfig();
+    }
+
+    if (getConfig().github.enabled) {
+        verifyGithubConfig();
     }
 
     if (getConfig().gitlab.enabled) {

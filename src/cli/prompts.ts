@@ -45,7 +45,7 @@ export const getPlatforms = async (): Promise<string[]> => {
         choices: [
             { title: "Azure", value: "Azure", selected: false },
             { title: "Github", value: "Github", selected: true },
-            { title: "Gitlab", value: "Gitlab" , selected: false},
+            { title: "Gitlab", value: "Gitlab", selected: false },
         ],
         instructions: false,
         min: 1,

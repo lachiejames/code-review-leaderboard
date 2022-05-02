@@ -8,7 +8,7 @@ module.exports = {
     // Azure-specific options
     azure: {
         // Controls whether Azure pull requests are included in the leaderboard
-        enabled: true,
+        enabled: false,
 
         // The home page for your organisation's gitlab
         baseUrl: "",
@@ -23,16 +23,16 @@ module.exports = {
         enabled: true,
 
         // The home page for your organisation's Github
-        baseUrl: "",
+        baseUrl: "https://github.com/cryptotaxcalculator",
 
         // Authenticates http requests during lookups
-        personalAccessToken: "",
+        personalAccessToken: "zdfgsdfsdvsddzcds",
     },
 
     // Gitlab-specific options
     gitlab: {
         // Controls whether Gitlab pull requests are included in the leaderboard
-        enabled: true,
+        enabled: false,
 
         // The home page for your organisation's gitlab
         baseUrl: "",

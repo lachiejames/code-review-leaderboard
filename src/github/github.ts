@@ -31,7 +31,7 @@ export const getGithubPullRequests = async (): Promise<PullRequest[]> => {
 
     for (let repoIndex = 0; repoIndex < repositoryData.length; repoIndex++) {
         const pullRequestsData: GithubPullRequest[] = await fetchGithubPullRequestsByProject(repositoryData[repoIndex].name);
-        const validPullRequestsData = pullRequestsData.filter((pr: GithubPullRequest) => inConfigDateRange(pr.creationDate));
+        const validPullRequestsData = pullRequestsData.filter((pr: GithubPullRequest) => inConfigDateRange(pr.updated_at));
         const pullRequests: PullRequest[] = parseGithubPullRequestData(validPullRequestsData);
 
         logPullRequestFetchingProgress(repoIndex, repositoryData.length, pullRequests.length);
@@ -41,7 +41,7 @@ export const getGithubPullRequests = async (): Promise<PullRequest[]> => {
 
             const threads: GithubPullRequestNote[] = await fetchPullRequestNotes(
                 repositoryData[repoIndex].name,
-                validPullRequestsData[prIndex].pullRequestId,
+                validPullRequestsData[prIndex].number,
             );
             const validThreads = threads.filter((pr: GithubPullRequestNote) => inConfigDateRange(pr.lastUpdatedDate));
 

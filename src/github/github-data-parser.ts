@@ -5,7 +5,7 @@ import { PullRequest } from "../shared/pull-request.model";
 import { GithubComment, GithubPullRequest, GithubPullRequestNote } from "./github-models";
 
 export const parseGithubPullRequestData = (data: GithubPullRequest[]): PullRequest[] => {
-    return data.map((pr) => new PullRequest(pr.createdBy.displayName));
+    return data.map((pr) => new PullRequest(pr.user.login));
 };
 
 const approvalRegex = /[a-zA-Z ]+ voted [0-9]+/;
@@ -25,7 +25,7 @@ export const parseGithubPullRequestNoteData = (threads: GithubPullRequestNote[])
 
     for (const thread of threads) {
         for (const comment of thread.comments) {
-            const note = new PullRequestNote(comment.author.displayName, determineNoteType(comment));
+            const note = new PullRequestNote(comment.author.login, determineNoteType(comment));
             if (note.noteType === NoteType.Approval || note.noteType === NoteType.Comment) {
                 pullRequestNotes.push(note);
             }

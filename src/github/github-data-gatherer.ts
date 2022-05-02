@@ -14,6 +14,7 @@ import {
 } from "./github-models";
 
 const BASE_URL = "https://api.github.com";
+const MAX_RESULTS_PER_PAGE = 100;
 
 const getBase64PAT = (): string => {
     const token = `:${getConfig().github.personalAccessToken}`;
@@ -34,7 +35,7 @@ const validateSuccessResponse = (response: GaxiosResponse): void => {
 };
 
 const handleErrorResponse = (response: GaxiosError): void => {
-    if (response.response === undefined) throw response
+    if (response.response === undefined) throw response;
 
     const baseErrorMessage = `Github responded with ${response.response.status} - ${response.response.statusText}`;
 
@@ -53,11 +54,12 @@ export const getGithubHttpHeaders = (): GithubHttpHeaders => {
     };
 };
 
-export const getGithubHttpParams = (): GithubHttpParams => {
+export const getGithubHttpParams = (pageNumber?: number): GithubHttpParams => {
     return {
-        "api-version": 6.0,
-        "$top": 1000,
-        "searchCriteria.status": "all",
+        state: "all",
+        per_page: MAX_RESULTS_PER_PAGE,
+        page: pageNumber ?? 1,
+        sort: "updated",
     };
 };
 
@@ -86,7 +88,7 @@ export const fetchPullRequestNotes = async (projectName: string, pullRequestID: 
         })
         .catch((response: GaxiosError<GithubPullRequestNoteResponse>) => handleErrorResponse(response));
 
-    return pullRequestLookupResponse?.data.value ?? [];
+    return pullRequestLookupResponse?.data ?? [];
 };
 
 export const fetchGithubPullRequestsByProject = async (projectName: string): Promise<GithubPullRequest[]> => {
@@ -107,7 +109,7 @@ export const fetchGithubPullRequestsByProject = async (projectName: string): Pro
         })
         .catch((response: GaxiosError<GithubPullRequestResponse>) => handleErrorResponse(response));
 
-    return pullRequestLookupResponse?.data.value ?? [];
+    return pullRequestLookupResponse?.data ?? [];
 };
 
 export const fetchGithubRepositoryData = async (): Promise<GithubRepository[]> => {
@@ -127,5 +129,5 @@ export const fetchGithubRepositoryData = async (): Promise<GithubRepository[]> =
         })
         .catch((response: GaxiosError<GithubRepositoryResponse>) => handleErrorResponse(response));
 
-    return repositoryLookupResponse?.data.value ?? [];
+    return repositoryLookupResponse?.data ?? [];
 };

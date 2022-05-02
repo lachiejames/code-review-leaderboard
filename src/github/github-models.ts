@@ -5,17 +5,17 @@ export interface GithubHttpHeaders {
 export interface GithubHttpParams {
     [key: string]: string | number;
 
-    "api-version": number;
-    "$top": number;
-    "searchCriteria.status": string;
-}
+    state: string;
 
-interface Project {
-    lastUpdateTime: string;
+    page: number;
+
+    per_page: number;
+
+    sort: string;
 }
 
 interface User {
-    displayName: string;
+    login: string;
 }
 
 export interface GithubComment {
@@ -31,15 +31,19 @@ export interface GithubComment {
 export interface GithubRepository {
     name: string;
 
-    project: Project;
+    updated_at: string;
 }
 
 export interface GithubPullRequest {
-    pullRequestId: number;
+    number: number;
 
-    createdBy: User;
+    state: string;
 
-    creationDate: string;
+    user: User;
+
+    updated_at: string;
+
+    merged_at: string;
 }
 
 export interface GithubPullRequestNote {
@@ -47,14 +51,8 @@ export interface GithubPullRequestNote {
     comments: GithubComment[];
 }
 
-export interface GithubRepositoryResponse {
-    value: GithubRepository[];
-}
+export type GithubRepositoryResponse = GithubRepository[];
 
-export interface GithubPullRequestResponse {
-    value: GithubPullRequest[];
-}
+export type GithubPullRequestResponse = GithubPullRequest[];
 
-export interface GithubPullRequestNoteResponse {
-    value: GithubPullRequestNote[];
-}
+export type GithubPullRequestNoteResponse = GithubPullRequestNote[];

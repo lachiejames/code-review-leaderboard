@@ -1,25 +1,20 @@
-{
-    "value": [
-        {
-            "pullRequestId": 3454,
-            "createdBy": {
-                "displayName": "John Howard"
-            },
-            "creationDate": "2021-05-03T04:56:58.8100349Z"
+[
+    {
+        "number": 1,
+        "state": "closed",
+        "user": {
+            "login": "John Howard"
         },
-        {
-            "pullRequestId": 3449,
-            "createdBy": {
-                "displayName": "Bob Hawke"
-            },
-            "creationDate": "2021-05-03T01:08:15.7096528Z"
+        "updated_at": "2020-07-02T09:57:09Z",
+        "merged_at": "2020-07-02T09:57:01Z"
+    },
+    {
+        "number": 1,
+        "state": "closed",
+        "user": {
+            "login": "Bob Hawke"
         },
-        {
-            "pullRequestId": 3400,
-            "createdBy": {
-                "displayName": "John Howard"
-            },
-            "creationDate": "2021-05-02T13:45:50.9351939Z"
-        }
-    ]
-}
+        "updated_at": "2020-07-02T09:57:09Z",
+        "merged_at": "2020-07-02T09:57:01Z"
+    }
+]

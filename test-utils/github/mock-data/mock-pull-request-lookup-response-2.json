@@ -1,25 +1,29 @@
-{
-    "value": [
-        {
-            "pullRequestId": 3433,
-            "createdBy": {
-                "displayName": "Malcolm Fraser"
-            },
-            "creationDate": "2021-05-01T15:07:48.9638653Z"
+[
+    {
+        "number": 1,
+        "state": "closed",
+        "user": {
+            "login": "Malcolm Fraser"
         },
-        {
-            "pullRequestId": 3403,
-            "createdBy": {
-                "displayName": "Bob Hawke"
-            },
-            "creationDate": "2021-05-01T15:06:00.183998Z"
+        "updated_at": "2020-07-02T09:57:09Z",
+        "merged_at": "2020-07-02T09:57:01Z"
+    },
+    {
+        "number": 2,
+        "state": "closed",
+        "user": {
+            "login": "Bob Hawke"
         },
-        {
-            "pullRequestId": 3307,
-            "createdBy": {
-                "displayName": "Malcolm Fraser"
-            },
-            "creationDate": "2021-05-02T15:08:45.3535621Z"
-        }
-    ]
-}
+        "updated_at": "2020-07-02T09:58:09Z",
+        "merged_at": "2020-07-02T09:58:01Z"
+    },
+    {
+        "number": 3,
+        "state": "closed",
+        "user": {
+            "login": "Malcolm Fraser"
+        },
+        "updated_at": "2020-07-02T09:59:09Z",
+        "merged_at": "2020-07-02T09:59:01Z"
+    }
+]

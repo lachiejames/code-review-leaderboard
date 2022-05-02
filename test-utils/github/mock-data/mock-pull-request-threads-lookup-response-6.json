@@ -1,43 +1,23 @@
-{
-    "value": [
-        {
-            "lastUpdatedDate": "2021-04-30T18:04:15.61Z",
-            "comments": [
-                {
-                    "author": {
-                        "displayName": "Malcolm Fraser"
-                    },
-                    "content": "Policy status has been updated",
-                    "lastUpdatedDate": "2021-01-14T18:04:15.61Z",
-                    "commentType": "system"
-                }
-            ]
+[
+    {
+        "user": {
+            "login": "Malcolm Fraser"
         },
-        {
-            "lastUpdatedDate": "2021-04-30T21:52:54.617Z",
-            "comments": [
-                {
-                    "author": {
-                        "displayName": "Scott Morrison"
-                    },
-                    "content": "Scott Morrison voted 10",
-                    "lastUpdatedDate": "2021-01-14T21:52:54.617Z",
-                    "commentType": "system"
-                }
-            ]
+        "state": "SOMETHING-ELSE",
+        "submitted_at": "2022-04-29T06:08:38Z"
+    },
+    {
+        "user": {
+            "login": "Scott Morrison"
         },
-        {
-            "lastUpdatedDate": "2021-04-30T21:53:01.367Z",
-            "comments": [
-                {
-                    "author": {
-                        "displayName": "Scott Morrison"
-                    },
-                    "content": "Scott Morrison updated the pull request status to Completed",
-                    "lastUpdatedDate": "2021-01-14T21:53:01.367Z",
-                    "commentType": "system"
-                }
-            ]
-        }
-    ]
-}
+        "state": "APPROVED",
+        "submitted_at": "2022-04-29T06:09:38Z"
+    },
+    {
+        "user": {
+            "login": "Malcolm Fraser"
+        },
+        "state": "SOMETHING-ELSE",
+        "submitted_at": "2022-04-29T06:10:38Z"
+    }
+]

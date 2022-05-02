@@ -1,30 +1,16 @@
-{
-    "value": [
-        {
-            "lastUpdatedDate": "2021-04-28T00:29:12.53Z",
-            "comments": [
-                {
-                    "author": {
-                        "displayName": "Gough Whitlam"
-                    },
-                    "content": "Gough Whitlam voted 10",
-                    "lastUpdatedDate": "2021-04-28T00:29:12.53Z",
-                    "commentType": "system"
-                }
-            ]
+[
+    {
+        "user": {
+            "login": "Gough Whitlam"
         },
-        {
-            "lastUpdatedDate": "2021-04-28T07:32:28.66Z",
-            "comments": [
-                {
-                    "author": {
-                        "displayName": "Bob Hawke"
-                    },
-                    "content": "Bob Hawke voted 10",
-                    "lastUpdatedDate": "2021-04-28T07:32:28.66Z",
-                    "commentType": "system"
-                }
-            ]
-        }
-    ]
-}
+        "state": "APPROVED",
+        "submitted_at": "2022-04-29T06:08:38Z"
+    },
+    {
+        "user": {
+            "login": "Bob Hawke"
+        },
+        "state": "APPROVED",
+        "submitted_at": "2022-04-29T06:44:38Z"
+    }
+]

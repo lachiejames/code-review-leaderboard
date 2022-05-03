@@ -29,7 +29,7 @@ describe("github data gatherer", () => {
             const data: GithubRepository[] = await fetchGithubRepositoryData();
             expect(data[0]).toEqual({
                 name: "nbn",
-                updated_at: "2022-02-15T04:21:22Z",
+                updated_at: "2020-10-10T23:10:12Z",
             });
         });
 
@@ -78,8 +78,7 @@ describe("github data gatherer", () => {
         it("response data contains expected content", async () => {
             const data: GithubPullRequest[] = await fetchAllGithubPullRequestsForProject("work-choices");
             expect(data[0]).toEqual({
-                merged_at: "2021-05-01T15:07:48Z",
-                number: 1,
+                number: 3433,
                 state: "closed",
                 updated_at: "2021-05-01T15:07:48Z",
                 user: {

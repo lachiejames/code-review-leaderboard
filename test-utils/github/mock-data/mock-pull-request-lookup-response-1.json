@@ -5,8 +5,7 @@
         "user": {
             "login": "John Howard"
         },
-        "updated_at": "2021-05-03T04:56:58",
-        "merged_at": "2020-07-02T09:57:01Z"
+        "updated_at": "2021-05-03T04:56:58"
     },
     {
         "number": 3449,
@@ -14,8 +13,7 @@
         "user": {
             "login": "Bob Hawke"
         },
-        "updated_at": "2021-05-03T01:08:15Z",
-        "merged_at": "2021-05-03T01:08:15Z"
+        "updated_at": "2021-05-03T01:08:15Z"
     },
     {
         "number": 3400,
@@ -23,7 +21,6 @@
         "user": {
             "login": "John Howard"
         },
-        "updated_at": "2021-05-02T13:45:50",
-        "merged_at": "2021-05-02T13:45:50Z"
+        "updated_at": "2021-05-02T13:45:50"
     }
 ]

@@ -44,8 +44,6 @@ export interface GithubPullRequest {
     user: User;
 
     updated_at: string;
-
-    merged_at: string;
 }
 
 export interface GithubPullRequestNote {

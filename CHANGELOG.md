@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/lachiejames/code-review-leaderboard/compare/v1.3.0...v1.3.1) (2022-05-03)
+
+
+### Bug Fixes
+
+* remove data from config ([7e943f6](https://github.com/lachiejames/code-review-leaderboard/commit/7e943f6a6be632714051fa8e765948b839cb7940))
+
 # [1.3.0](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.17...v1.3.0) (2022-05-03)
 
 

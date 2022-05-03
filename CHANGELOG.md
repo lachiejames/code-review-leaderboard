@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.17...v1.3.0) (2022-05-03)
+
+
+### Features
+
+* add Github support ([ba18865](https://github.com/lachiejames/code-review-leaderboard/commit/ba188655f2aee2181324f8c5627a2537e0398a02))
+
 ## [1.2.17](https://github.com/lachiejames/code-review-leaderboard/compare/v1.2.16...v1.2.17) (2022-02-02)
 
 

@@ -23,10 +23,10 @@ module.exports = {
         enabled: true,
 
         // The home page for your organisation's Github
-        baseUrl: "https://github.com/cryptotaxcalculator",
+        baseUrl: "",
 
         // Authenticates http requests during lookups
-        personalAccessToken: "zdfgsdfsdvsddzcds",
+        personalAccessToken: "",
     },
 
     // Gitlab-specific options

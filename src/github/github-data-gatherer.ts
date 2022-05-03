@@ -1,7 +1,7 @@
-import { isWithinInterval } from "date-fns";
 import { GaxiosError, GaxiosResponse, request } from "gaxios";
 
 import { getConfig } from "../config";
+import { inConfigDateRange } from "../shared/config-verifier";
 
 import {
     GithubHttpHeaders,
@@ -29,8 +29,6 @@ const validateSuccessResponse = (response: GaxiosResponse): void => {
 
     if (response.status === 200) {
         return;
-    } else if (response.status === 203) {
-        throw Error(`${baseErrorMessage}, which likely means that your personal access token is invalid`);
     } else {
         throw Error(baseErrorMessage);
     }
@@ -113,13 +111,6 @@ const fetchGithubPullRequestsByProject = async (projectName: string, pageNumber:
         .catch((response: GaxiosError<GithubPullRequestResponse>) => handleErrorResponse(response));
 
     return pullRequestLookupResponse?.data ?? [];
-};
-
-const inConfigDateRange = (prDateString: string): boolean => {
-    const prDate = new Date(prDateString);
-    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
-
-    return isWithinInterval(prDate, allowedDateRange);
 };
 
 export const fetchAllGithubPullRequestsForProject = async (projectName: string): Promise<GithubPullRequest[]> => {

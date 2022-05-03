@@ -1,6 +1,4 @@
-import { isWithinInterval } from "date-fns";
-
-import { getConfig } from "../config";
+import { inConfigDateRange } from "../shared/config-verifier";
 import { PullRequest } from "../shared/pull-request.model";
 import { logNoteCount } from "../shared/shared-logger";
 
@@ -13,13 +11,6 @@ import {
     logRepositoryFetchingStart,
 } from "./azure-logger";
 import { AzurePullRequest, AzurePullRequestNote, AzureRepository } from "./azure-models";
-
-const inConfigDateRange = (prDateString: string): boolean => {
-    const prDate = new Date(prDateString);
-    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
-
-    return isWithinInterval(prDate, allowedDateRange);
-};
 
 export const getAzurePullRequests = async (): Promise<PullRequest[]> => {
     logRepositoryFetchingStart();

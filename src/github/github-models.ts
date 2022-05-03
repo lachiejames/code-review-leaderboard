@@ -20,16 +20,6 @@ interface User {
     login: string;
 }
 
-export interface GithubComment {
-    author: User;
-
-    content: string;
-
-    lastUpdatedDate: string;
-
-    commentType: string;
-}
-
 export interface GithubRepository {
     name: string;
 

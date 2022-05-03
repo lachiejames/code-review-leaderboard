@@ -1,4 +1,4 @@
-import { format, isBefore } from "date-fns";
+import { format, isBefore, isWithinInterval } from "date-fns";
 
 import { getConfig } from "../config";
 
@@ -54,4 +54,11 @@ export const verifyConfig = (): void => {
     if (getConfig().gitlab.enabled) {
         verifyGitlabConfig();
     }
+};
+
+export const inConfigDateRange = (prDateString: string): boolean => {
+    const prDate = new Date(prDateString);
+    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
+
+    return isWithinInterval(prDate, allowedDateRange);
 };

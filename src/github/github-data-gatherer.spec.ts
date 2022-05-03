@@ -105,7 +105,7 @@ describe("github data gatherer", () => {
             const data: GithubPullRequestNote[] = await fetchPullRequestNotes("nbn", 3454);
             expect(data[0]).toEqual({
                 state: "COMMENTED",
-                submitted_at: "2021-05-02T04:05:23Z",
+                submitted_at: "2021-05-02T06:14:25Z",
                 user: {
                     login: "Bob Hawke",
                 },

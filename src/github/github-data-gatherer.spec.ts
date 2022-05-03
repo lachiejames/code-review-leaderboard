@@ -98,12 +98,18 @@ describe("github data gatherer", () => {
     describe("fetchPullRequestNotes()", () => {
         it("response contains expected number of data entries", async () => {
             const data: GithubPullRequestNote[] = await fetchPullRequestNotes("nbn", 3454);
-            expect(data.length).toBe(1);
+            expect(data.length).toBe(2);
         });
 
         it("response data contains expected content", async () => {
             const data: GithubPullRequestNote[] = await fetchPullRequestNotes("nbn", 3454);
-            expect(data[0]).toEqual({});
+            expect(data[0]).toEqual({
+                state: "COMMENTED",
+                submitted_at: "2021-05-02T04:05:23Z",
+                user: {
+                    login: "Bob Hawke",
+                },
+            });
         });
 
         it("logs expected error when HTTP request times out", async () => {

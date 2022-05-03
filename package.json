@@ -36,7 +36,7 @@
     "scripts": {
         "build": "tsc",
         "start": "ts-node .",
-        "test": "jest --coverage --detectOpenHandles --runInBand",
+        "test": "jest --coverage --detectOpenHandles",
         "format": "prettier . --write & eslint . --fix"
     },
     "bin": {

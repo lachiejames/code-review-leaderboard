@@ -64,9 +64,11 @@ describe("cli config", () => {
             prompts.inject([
                 new Date("2021-04-26"),
                 new Date("2021-05-12"),
-                ["Azure", "Gitlab"],
+                ["Azure", "Github", "Gitlab"],
                 "https://dev.azure.com/MyOrg",
                 "abc123",
+                "https://github.com/MyOrg",
+                "acb132",
                 "https://gitlab.example.com/",
                 "cba321",
             ]);
@@ -79,6 +81,11 @@ describe("cli config", () => {
                     baseUrl: "https://dev.azure.com/MyOrg",
                     enabled: true,
                     personalAccessToken: "abc123",
+                },
+                github: {
+                    baseUrl: "https://github.com/MyOrg",
+                    enabled: true,
+                    personalAccessToken: "acb132",
                 },
                 gitlab: {
                     baseUrl: "https://gitlab.example.com/",

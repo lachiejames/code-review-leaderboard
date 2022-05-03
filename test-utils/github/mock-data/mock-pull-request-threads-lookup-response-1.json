@@ -1,0 +1,16 @@
+[
+    {
+        "user": {
+            "login": "Bob Hawke"
+        },
+        "state": "COMMENTED",
+        "submitted_at": "2021-05-02T06:14:25Z"
+    },
+    {
+        "user": {
+            "login": "John Howard"
+        },
+        "state": "COMMENTED",
+        "submitted_at": "2021-05-02T06:14:25Z"
+    }
+]

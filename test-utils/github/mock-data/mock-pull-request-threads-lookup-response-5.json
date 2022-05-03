@@ -1,0 +1,16 @@
+[
+    {
+        "user": {
+            "login": "John Howard"
+        },
+        "state": "SOMETHING-ELSE",
+        "submitted_at": "2021-04-28T23:44:07Z"
+    },
+    {
+        "user": {
+            "login": "Renovatebot"
+        },
+        "state": "SOMETHING-ELSE",
+        "submitted_at": "2021-04-28T23:58:24Z"
+    }
+]

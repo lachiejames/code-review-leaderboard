@@ -1,0 +1,26 @@
+[
+    {
+        "number": 3454,
+        "state": "closed",
+        "user": {
+            "login": "John Howard"
+        },
+        "updated_at": "2021-05-03T04:56:58"
+    },
+    {
+        "number": 3449,
+        "state": "closed",
+        "user": {
+            "login": "Bob Hawke"
+        },
+        "updated_at": "2021-05-03T01:08:15Z"
+    },
+    {
+        "number": 3400,
+        "state": "closed",
+        "user": {
+            "login": "John Howard"
+        },
+        "updated_at": "2021-05-02T13:45:50"
+    }
+]

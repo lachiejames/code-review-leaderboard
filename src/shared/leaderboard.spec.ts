@@ -2,6 +2,7 @@ import MockConsole from "jest-mock-console";
 
 import { setAzureRequestMocks } from "../../test-utils/azure/azure-request-mocks";
 import { MOCK_PULL_REQUESTS_AZURE } from "../../test-utils/azure/mock-pull-requests";
+import { setGithubRequestMocks } from "../../test-utils/github/github-request-mocks";
 import { setGitlabRequestMocks } from "../../test-utils/gitlab/gitlab-request-mocks";
 import { MOCK_PULL_REQUESTS_GITLAB } from "../../test-utils/gitlab/mock-pull-requests";
 import { MOCK_PULL_REQUESTS_ALL } from "../../test-utils/shared/mock-pull-requests";
@@ -19,10 +20,17 @@ describe("leaderboard", () => {
     describe("getAllPullRequestData()", () => {
         beforeEach(() => {
             setGitlabRequestMocks();
+            setGithubRequestMocks();
             setAzureRequestMocks();
         });
 
         describe("if Azure and Gitlab are enabled", () => {
+            beforeEach(() => {
+                overrideConfig({
+                    github: { ...getConfig().github, enabled: false },
+                });
+            });
+
             it("returns expected number of pull requests", async () => {
                 const pullRequests: PullRequest[] = await getAllPullRequestData();
                 expect(pullRequests.length).toEqual(11);
@@ -36,7 +44,10 @@ describe("leaderboard", () => {
 
         describe("if only Gitlab is enabled", () => {
             beforeEach(() => {
-                getConfig().azure.enabled = false;
+                overrideConfig({
+                    azure: { ...getConfig().azure, enabled: false },
+                    github: { ...getConfig().github, enabled: false },
+                });
             });
 
             it("returns expected number of pull requests", async () => {
@@ -53,6 +64,10 @@ describe("leaderboard", () => {
         describe("if only Azure is enabled", () => {
             beforeEach(() => {
                 overrideConfig({ gitlab: { ...getConfig().gitlab, enabled: false } });
+                overrideConfig({
+                    github: { ...getConfig().github, enabled: false },
+                    gitlab: { ...getConfig().gitlab, enabled: false },
+                });
             });
 
             it("returns expected number of pull requests", async () => {
@@ -66,9 +81,10 @@ describe("leaderboard", () => {
             });
         });
 
-        describe("if Azure and Gitlab are disabled", () => {
+        describe("if all platforms are disabled", () => {
             beforeEach(() => {
                 overrideConfig({ azure: { ...getConfig().azure, enabled: false } });
+                overrideConfig({ github: { ...getConfig().github, enabled: false } });
                 overrideConfig({ gitlab: { ...getConfig().gitlab, enabled: false } });
             });
 
@@ -119,6 +135,7 @@ describe("leaderboard", () => {
         beforeEach(() => {
             MockConsole();
             setGitlabRequestMocks();
+            setGithubRequestMocks();
             setAzureRequestMocks();
         });
 
@@ -132,17 +149,17 @@ describe("leaderboard", () => {
                     `╟──────────────────┬───────────────┬──────────┬───────────╢\n` +
                     `║       Name       │ Pull Requests │ Comments │ Approvals ║\n` +
                     `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
-                    `║   John Howard    │       4       │    4     │     2     ║\n` +
+                    `║   John Howard    │       6       │    5     │     2     ║\n` +
+                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
+                    `║    Bob Hawke     │       4       │    2     │     2     ║\n` +
                     `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
                     `║   Tony Abbott    │       1       │    1     │     2     ║\n` +
-                    `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
-                    `║    Bob Hawke     │       2       │    1     │     1     ║\n` +
                     `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
                     `║    Kevin Rudd    │       1       │    1     │     1     ║\n` +
                     `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
                     `║ Malcolm Turnbull │       1       │    1     │     0     ║\n` +
                     `╟──────────────────┼───────────────┼──────────┼───────────╢\n` +
-                    `║  Malcolm Fraser  │       2       │    0     │     0     ║\n` +
+                    `║  Malcolm Fraser  │       4       │    0     │     0     ║\n` +
                     `╚══════════════════╧═══════════════╧══════════╧═══════════╝\n`,
             );
         });

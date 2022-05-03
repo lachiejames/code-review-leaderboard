@@ -43,8 +43,9 @@ export const getPlatforms = async (): Promise<string[]> => {
         name: PROMPT_NAME,
         message: "Select your platforms: ",
         choices: [
-            { title: "Azure", value: "Azure", selected: true },
-            { title: "Gitlab", value: "Gitlab" },
+            { title: "Azure", value: "Azure", selected: false },
+            { title: "Github", value: "Github", selected: true },
+            { title: "Gitlab", value: "Gitlab", selected: false },
         ],
         instructions: false,
         min: 1,
@@ -69,6 +70,28 @@ export const getAzureAccessToken = async (): Promise<string> => {
         name: PROMPT_NAME,
         type: "text",
         message: "Enter your Azure personal access token: ",
+        validate: (token: string) => validatePersonalAccessToken(token),
+    });
+
+    return promptData[PROMPT_NAME];
+};
+
+export const getGithubBaseUrl = async (): Promise<string> => {
+    const promptData: Answers<PromptType> = await prompts({
+        name: PROMPT_NAME,
+        type: "text",
+        message: "Enter your Github organisation's base Url: ",
+        validate: (url: string) => validateUrl(url),
+    });
+
+    return promptData[PROMPT_NAME];
+};
+
+export const getGithubAccessToken = async (): Promise<string> => {
+    const promptData: Answers<PromptType> = await prompts({
+        name: PROMPT_NAME,
+        type: "text",
+        message: "Enter your Github personal access token: ",
         validate: (token: string) => validatePersonalAccessToken(token),
     });
 
@@ -106,6 +129,11 @@ const getEmptyConfig = (): Config => {
             baseUrl: "",
             personalAccessToken: "",
         },
+        github: {
+            enabled: false,
+            baseUrl: "",
+            personalAccessToken: "",
+        },
         gitlab: {
             enabled: false,
             baseUrl: "",
@@ -123,11 +151,17 @@ export const getConfigFromCli = async (): Promise<Config> => {
 
     const platforms: string[] = await getPlatforms();
     config.azure.enabled = platforms.includes("Azure");
+    config.github.enabled = platforms.includes("Github");
     config.gitlab.enabled = platforms.includes("Gitlab");
 
     if (config.azure.enabled) {
         config.azure.baseUrl = await getAzureBaseUrl();
         config.azure.personalAccessToken = await getAzureAccessToken();
+    }
+
+    if (config.github.enabled) {
+        config.github.baseUrl = await getGithubBaseUrl();
+        config.github.personalAccessToken = await getGithubAccessToken();
     }
 
     if (config.gitlab.enabled) {

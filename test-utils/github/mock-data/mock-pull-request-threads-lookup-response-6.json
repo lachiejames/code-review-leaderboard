@@ -1,0 +1,23 @@
+[
+    {
+        "user": {
+            "login": "Malcolm Fraser"
+        },
+        "state": "SOMETHING-ELSE",
+        "submitted_at": "2021-04-30T18:04:15Z"
+    },
+    {
+        "user": {
+            "login": "Scott Morrison"
+        },
+        "state": "APPROVED",
+        "submitted_at": "2021-04-30T21:52:54Z"
+    },
+    {
+        "user": {
+            "login": "Scott Morrison"
+        },
+        "state": "SOMETHING-ELSE",
+        "submitted_at": "2021-04-30T21:53:01Z"
+    }
+]

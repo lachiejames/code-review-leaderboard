@@ -1,0 +1,26 @@
+[
+    {
+        "number": 3433,
+        "state": "closed",
+        "user": {
+            "login": "Malcolm Fraser"
+        },
+        "updated_at": "2021-05-01T15:07:48Z"
+    },
+    {
+        "number": 3403,
+        "state": "closed",
+        "user": {
+            "login": "Bob Hawke"
+        },
+        "updated_at": "2021-05-01T15:06:00Z"
+    },
+    {
+        "number": 3307,
+        "state": "closed",
+        "user": {
+            "login": "Malcolm Fraser"
+        },
+        "updated_at": "2021-05-02T15:08:45Z"
+    }
+]

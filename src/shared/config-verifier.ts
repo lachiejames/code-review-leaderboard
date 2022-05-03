@@ -1,4 +1,4 @@
-import { format, isBefore } from "date-fns";
+import { format, isBefore, isWithinInterval } from "date-fns";
 
 import { getConfig } from "../config";
 
@@ -9,6 +9,16 @@ const verifyAzureConfig = (): void => {
 
     if (getConfig().azure.personalAccessToken === "") {
         throw Error(`Azure pull requests are enabled, but you have not set a personal access token`);
+    }
+};
+
+const verifyGithubConfig = (): void => {
+    if (getConfig().github.personalAccessToken === "") {
+        throw Error(`Github pull requests are enabled, but you have not set a personal access token`);
+    }
+
+    if (getConfig().github.baseUrl === "") {
+        throw Error(`Github pull requests are enabled, but you have not set a base URL`);
     }
 };
 
@@ -37,7 +47,18 @@ export const verifyConfig = (): void => {
         verifyAzureConfig();
     }
 
+    if (getConfig().github.enabled) {
+        verifyGithubConfig();
+    }
+
     if (getConfig().gitlab.enabled) {
         verifyGitlabConfig();
     }
+};
+
+export const inConfigDateRange = (prDateString: string): boolean => {
+    const prDate = new Date(prDateString);
+    const allowedDateRange: Interval = { start: getConfig().startDate, end: getConfig().endDate };
+
+    return isWithinInterval(prDate, allowedDateRange);
 };

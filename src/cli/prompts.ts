@@ -140,6 +140,7 @@ const getEmptyConfig = (): Config => {
             personalAccessToken: "",
         },
         httpTimeoutInMS: 5000,
+		users: [],
     };
 };
 

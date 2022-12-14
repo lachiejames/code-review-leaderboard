@@ -33,7 +33,18 @@ export const calculateResults = (pullRequests: PullRequest[]): Result[] => {
     logCalculationStart();
 
     const uniqueNames: string[] = getUniqueNames(pullRequests);
-    const results: Result[] = uniqueNames.map((name: string) => new Result(name));
+	
+	// Added list of allowed names in config to filter users
+	const allowedNames = getConfig().users;
+	var filteredNames = [];
+	if (allowedNames.length === 0) {
+		filteredNames = uniqueNames;
+	}
+	else {
+		filteredNames = uniqueNames.filter(item => allowedNames.includes(item));
+	}	
+	
+    const results: Result[] = filteredNames.map((name: string) => new Result(name));
 
     for (const result of results) {
         for (const pullRequest of pullRequests) {

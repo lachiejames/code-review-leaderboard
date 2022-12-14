@@ -18,4 +18,6 @@ export interface Config {
     gitlab: Platform;
 
     httpTimeoutInMS: number;
+	
+	users: string[];
 }

@@ -43,4 +43,7 @@ module.exports = {
 
     // Max amount of time to wait for a single HTTP request response, in milliseconds
     httpTimeoutInMS: 5000,
+	
+	// List of users. [] to disable filter	
+	users: [],
 };

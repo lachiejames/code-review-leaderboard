@@ -3,6 +3,8 @@ import ora, { Ora } from "ora";
 import { NoteType } from "./note-type.enum";
 import { PullRequestNote } from "./pull-request-note.model";
 import { PullRequest } from "./pull-request.model";
+import { Commit } from "./commit.model";
+import { Push } from "./push.model";
 
 export const terminalSpinner: Ora = ora();
 
@@ -24,6 +26,16 @@ export const logNoteCount = (pullRequests: PullRequest[]): void => {
     const totalComments = countPullRequestActivity(pullRequests, NoteType.Comment);
     const totalApprovals = countPullRequestActivity(pullRequests, NoteType.Approval);
     terminalSpinner.succeed(`Found ${totalComments} comments and ${totalApprovals} approvals\n`);
+};
+
+export const logCommitCount = (commits: Commit[]): void => {
+    const totalCommits = commits.length;
+    terminalSpinner.succeed(`Found ${totalCommits} commits\n`);
+};
+
+export const logPushCount = (pushes: Push[]): void => {
+    const totalPushes = pushes.length;
+    terminalSpinner.succeed(`Found ${totalPushes} pushes\n`);
 };
 
 export const logCalculationStart = (): void => {

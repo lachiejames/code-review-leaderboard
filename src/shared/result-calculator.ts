@@ -6,9 +6,11 @@ import { NoteType } from "../shared/note-type.enum";
 import { Result } from "../shared/result.model";
 
 import { PullRequest } from "./pull-request.model";
+import { Commit } from "./commit.model";
+import { Push } from "./push.model";
 import { logCalculationComplete, logCalculationStart } from "./shared-logger";
 
-const TABLE_HEADINGS: string[] = ["Name", "Pull Requests", "Comments", "Approvals"];
+const TABLE_HEADINGS: string[] = ["Name", "Commits", "Pushes", "Pull Requests", "Comments", "Approvals"];
 
 const formatDate = (date: Date): string => {
     return format(date, "dd/MM/yyyy");
@@ -29,7 +31,7 @@ const getUniqueNames = (pullRequests: PullRequest[]): string[] => {
     return [...new Set(pullRequests.map((pullRequest) => pullRequest.authorName))];
 };
 
-export const calculateResults = (pullRequests: PullRequest[]): Result[] => {
+export const calculateResults = (pullRequests: PullRequest[], commits: Commit[], pushes: Push[]): Result[] => {
     logCalculationStart();
 
     const uniqueNames: string[] = getUniqueNames(pullRequests);
@@ -45,7 +47,6 @@ export const calculateResults = (pullRequests: PullRequest[]): Result[] => {
 	}	
 	
     const results: Result[] = filteredNames.map((name: string) => new Result(name));
-
     for (const result of results) {
         for (const pullRequest of pullRequests) {
             if (pullRequest.authorName === result.name) {
@@ -60,6 +61,18 @@ export const calculateResults = (pullRequests: PullRequest[]): Result[] => {
                 }
             }
         }
+
+		for (const commit of commits) {
+            if (commit.authorName === result.name) {
+                result.numCommits++;
+            }
+        }	
+
+		for (const push of pushes) {
+            if (push.authorName === result.name) {
+                result.numPushes++;
+            }
+        }			
     }
 
     logCalculationComplete();
@@ -82,7 +95,7 @@ export const createResultsTable = (results: Result[]): (number | string)[][] => 
     tableResults.push(TABLE_HEADINGS);
 
     results.forEach((result: Result) => {
-        tableResults.push([result.name, result.numPullRequests, result.numComments, result.numApprovals]);
+        tableResults.push([result.name, result.numCommits, result.numPushes, result.numPullRequests, result.numComments, result.numApprovals]);
     });
 
     return tableResults;

@@ -6,9 +6,13 @@ import {
     AzureHttpHeaders,
     AzureHttpParams,
     AzurePullRequest,
+	AzurePullRequestResponse,
+	AzureCommit,
+	AzureCommitResponse,
+	AzurePush,
+	AzurePushResponse,
     AzurePullRequestNote,
-    AzurePullRequestNoteResponse,
-    AzurePullRequestResponse,
+    AzurePullRequestNoteResponse,    
     AzureRepository,
     AzureRepositoryResponse,
 } from "./azure-models";
@@ -65,7 +69,7 @@ export const getAzureHttpParams = (): AzureHttpParams => {
 
 export const fetchPullRequestNotes = async (projectName: string, repositoryName: string, pullRequestID: number): Promise<AzurePullRequestNote[]> => {
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestNoteResponse> | undefined;
-
+	
     await request<AzurePullRequestNoteResponse>({
         baseUrl: getConfig().azure.baseUrl,
         url: `/${projectName}/_apis/git/repositories/${repositoryName}/pullrequests/${pullRequestID}/threads`,
@@ -78,15 +82,18 @@ export const fetchPullRequestNotes = async (projectName: string, repositoryName:
             validateSuccessResponse(response);
             pullRequestLookupResponse = response;
         })
-        .catch((response: GaxiosError<AzurePullRequestNoteResponse>) => handleErrorResponse(response));
+        .catch((response: GaxiosError<AzurePullRequestNoteResponse>) => {
+			console.log(getConfig().azure.baseUrl + `/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`);
+			handleErrorResponse(response);
+		})
 
     return pullRequestLookupResponse?.data.value ?? [];
 };
 
 export const fetchAzurePullRequestsByProject = async (projectName: string): Promise<AzurePullRequest[]> => {
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestResponse> | undefined;
-
-    await request<AzurePullRequestResponse>({
+    
+	await request<AzurePullRequestResponse>({
         baseUrl: getConfig().azure.baseUrl,
         url: `/${projectName}/_apis/git/pullrequests`,
         method: "GET",
@@ -99,15 +106,67 @@ export const fetchAzurePullRequestsByProject = async (projectName: string): Prom
             validateSuccessResponse(response);
             pullRequestLookupResponse = response;
         })
-        .catch((response: GaxiosError<AzurePullRequestResponse>) => handleErrorResponse(response));
+        .catch((response: GaxiosError<AzurePullRequestResponse>) => {
+			console.log(getConfig().azure.baseUrl + `/${projectName}/_apis/git/pullrequests`);
+			handleErrorResponse(response);
+		})
 
     return pullRequestLookupResponse?.data.value ?? [];
 };
 
+export const fetchAzureCommitsByProject = async (projectName: string, repositoryName: string): Promise<AzureCommit[]> => {
+    let CommitLookupResponse: GaxiosResponse<AzureCommitResponse> | undefined;
+    
+	await request<AzureCommitResponse>({
+        baseUrl: getConfig().azure.baseUrl,
+        url: `/${projectName}/_apis/git/repositories/${repositoryName}/commits`,
+        method: "GET",
+        params: getAzureHttpParams(),
+        headers: getAzureHttpHeaders(),
+        timeout: getConfig().httpTimeoutInMS,
+        retry: true,
+    })
+        .then((response: GaxiosResponse<AzureCommitResponse>) => {
+            validateSuccessResponse(response);
+            CommitLookupResponse = response;
+        })
+        .catch((response: GaxiosError<AzureCommitResponse>) => {
+			console.log(getConfig().azure.baseUrl + `/${projectName}/_apis/git/repositories/${repositoryName}/commits`,);
+			handleErrorResponse(response);
+		})
+
+    return CommitLookupResponse?.data.value ?? [];
+};
+
+export const fetchAzurePushesByProject = async (projectName: string, repositoryName: string): Promise<AzurePush[]> => {
+    let PushLookupResponse: GaxiosResponse<AzurePushResponse> | undefined;
+    
+	await request<AzurePushResponse>({
+        baseUrl: getConfig().azure.baseUrl,
+        url: `/${projectName}/_apis/git/repositories/${repositoryName}/pushes`,
+        method: "GET",
+        params: getAzureHttpParams(),
+        headers: getAzureHttpHeaders(),
+        timeout: getConfig().httpTimeoutInMS,
+        retry: true,
+    })
+        .then((response: GaxiosResponse<AzurePushResponse>) => {
+            validateSuccessResponse(response);
+            PushLookupResponse = response;
+        })
+        .catch((response: GaxiosError<AzurePushResponse>) => {
+			console.log(getConfig().azure.baseUrl + `/${projectName}/_apis/git/repositories/${repositoryName}/pushes`,);
+			handleErrorResponse(response);
+		})
+
+    return PushLookupResponse?.data.value ?? [];
+};
+
+
 export const fetchAzureRepositoryData = async (): Promise<AzureRepository[]> => {
     let repositoryLookupResponse: GaxiosResponse<AzureRepositoryResponse> | undefined;
-
-    await request<AzureRepositoryResponse>({
+    
+	await request<AzureRepositoryResponse>({
         baseUrl: getConfig().azure.baseUrl,
         url: `/_apis/git/repositories`,
         method: "GET",
@@ -119,7 +178,10 @@ export const fetchAzureRepositoryData = async (): Promise<AzureRepository[]> => 
             validateSuccessResponse(response);
             repositoryLookupResponse = response;
         })
-        .catch((response: GaxiosError<AzureRepositoryResponse>) => handleErrorResponse(response));
+        .catch((response: GaxiosError<AzureRepositoryResponse>) => {
+			console.log(getConfig().azure.baseUrl + `/_apis/git/repositories`);
+			handleErrorResponse(response);
+		})
 
     return repositoryLookupResponse?.data.value ?? [];
 };

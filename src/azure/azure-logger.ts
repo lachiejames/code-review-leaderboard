@@ -9,7 +9,7 @@ export const logPullRequestFetchingProgress = (repoIndex: number, numRepos: numb
         terminalSpinner.start("");
     }
 
-    terminalSpinner.text = `Fetching pull requests for each repository... ${repoIndex + 1}/${numRepos}`;
+    terminalSpinner.text = `Fetching pull requests & commits for each repository... ${repoIndex + 1}/${numRepos}`;
 
     if (repoIndex + 1 === numRepos && numPRs === 0) {
         terminalSpinner.stopAndPersist();
@@ -30,3 +30,4 @@ export const logRepositoryFetchingCompletion = (numRepos: number): void => {
     terminalSpinner.stopAndPersist();
     terminalSpinner.succeed(`Found ${numRepos} repositories!`);
 };
+

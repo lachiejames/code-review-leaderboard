@@ -63,12 +63,12 @@ export const getAzureHttpParams = (): AzureHttpParams => {
     };
 };
 
-export const fetchPullRequestNotes = async (projectName: string, pullRequestID: number): Promise<AzurePullRequestNote[]> => {
+export const fetchPullRequestNotes = async (projectName: string, repositoryName: string, pullRequestID: number): Promise<AzurePullRequestNote[]> => {
     let pullRequestLookupResponse: GaxiosResponse<AzurePullRequestNoteResponse> | undefined;
 
     await request<AzurePullRequestNoteResponse>({
         baseUrl: getConfig().azure.baseUrl,
-        url: `/${projectName}/_apis/git/repositories/${projectName}/pullrequests/${pullRequestID}/threads`,
+        url: `/${projectName}/_apis/git/repositories/${repositoryName}/pullrequests/${pullRequestID}/threads`,
         method: "GET",
         headers: getAzureHttpHeaders(),
         timeout: getConfig().httpTimeoutInMS,

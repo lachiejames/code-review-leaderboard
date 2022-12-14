@@ -11,6 +11,7 @@ export interface AzureHttpParams {
 }
 
 interface Project {
+	name : string;
     lastUpdateTime: string;
 }
 

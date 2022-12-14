@@ -21,7 +21,7 @@ export const getAzurePullRequests = async (): Promise<PullRequest[]> => {
     logRepositoryFetchingCompletion(repositoryData.length);
 
     for (let repoIndex = 0; repoIndex < repositoryData.length; repoIndex++) {
-        const pullRequestsData: AzurePullRequest[] = await fetchAzurePullRequestsByProject(repositoryData[repoIndex].name);
+        const pullRequestsData: AzurePullRequest[] = await fetchAzurePullRequestsByProject(repositoryData[repoIndex].project.name);
         const validPullRequestsData = pullRequestsData.filter((pr: AzurePullRequest) => inConfigDateRange(pr.creationDate));
         const pullRequests: PullRequest[] = parseAzurePullRequestData(validPullRequestsData);
 
@@ -31,6 +31,7 @@ export const getAzurePullRequests = async (): Promise<PullRequest[]> => {
             logPullRequestNoteFetchingProgress(repoIndex, repositoryData.length, prIndex, pullRequests.length);
 
             const threads: AzurePullRequestNote[] = await fetchPullRequestNotes(
+			    repositoryData[repoIndex].project.name,
                 repositoryData[repoIndex].name,
                 validPullRequestsData[prIndex].pullRequestId,
             );

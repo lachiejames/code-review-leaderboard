@@ -2,3 +2,5 @@
 **/lib/**
 **/coverage/**
 **/.vscode/**
+/.vs
+/code-review-leaderboard.config.js
